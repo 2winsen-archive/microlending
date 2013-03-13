@@ -6,14 +6,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
+import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@Path("/rest")
+@Path("/")
 public class MicrolendingFacade {
 
 	@Autowired
@@ -23,10 +25,12 @@ public class MicrolendingFacade {
 	private LoanService loanService;
 	
 	@GET
-	@Path("/test")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String test() {
-		return "Oh hai";
+	@Path("/getServerConstants")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonServerData getServerConstants() {
+		JsonServerData data = new JsonServerData();
+		data.setInterest(MicrolandingUtils.INTEREST);
+		return data;
 	}
 	
 	@GET

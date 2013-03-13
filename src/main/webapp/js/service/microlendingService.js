@@ -4,16 +4,16 @@ var BASE_PATH = "microlending/rest";
 
 var rootURL = HOST + ":" + PORT + "/" + BASE_PATH;
 
-function getServerConstants() {
+function getServerConstants(completeHandler) {
 	console.log('getServerConstants');
 	$.ajax({
 		type: 'GET',
 		url: rootURL + "/getServerConstants",
 		dataType: "json",
 		success: function(data) {
-			var a = 10;
-			var b = 10;
-		}
+			INTEREST = data.interest;
+		},
+		complete: completeHandler
 	});
 }
 

@@ -1,5 +1,5 @@
 // Init from server side
-var INTEREST_STEP;
+var INTEREST;
 
 var NUM_DECIMALS = 2;
 
