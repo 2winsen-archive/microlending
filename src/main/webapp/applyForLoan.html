@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Microlending</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<style type="text/css">
+			/* Sticky footer styles
+			 -------------------------------------------------- */
+
+			html, body {
+				height: 100%;
+				/* The html and body elements cannot have any padding or margin. */
+			}
+
+			#slidersContainer {
+				padding-top: 60px;
+			}
+
+			#innerSlidersContainer {
+				border-style: solid;
+				border-width: 1px;
+				padding: 40px 40px 10px 40px;
+				margin-top: 40px;
+				border-radius: 15px;
+			}
+
+			/* Wrapper for page content to push down footer */
+			#wrap {
+				min-height: 100%;
+				height: auto !important;
+				height: 100%;
+				/* Negative indent footer by it's height */
+				margin: 0 auto -60px;
+			}
+
+			/* Set the fixed height of the footer here */
+			#footer {
+				height: 60px;
+			}
+			#footer {
+				background-color: #E9E9E9;
+			}
+
+			/* Custom page CSS
+			 -------------------------------------------------- */
+			/* Not required for template or sticky footer method. */
+				.container {
+					width: auto;
+					max-width: 900px;
+				}
+				.container .credit {
+					margin: 20px 0;
+				}
+
+				.verticalLine {
+					border-left: thin solid #BFBFBF;
+					padding-left: 10px;
+					margin-left: -20px;
+				}
+
+				#loanDetailsTable {
+					width: 100%;
+				}
+
+				#loanDetailsTable caption {
+					height: 40px;
+					font-weight: bold;
+					font-size: 130%;
+				}
+
+				#loanDetailsTable td {
+					height: 40px;
+				}
+
+				.loanDetailsTableValue {
+					color: #7c767c;
+					font-weight: bold;
+					font-size: 110%;
+					text-align: right;
+				}
+
+				#dueDateRow {
+					border-top: thin solid #BFBFBF;
+				}
+				
+				.returnRow {
+					font-weight: bold;
+				}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="index.html">Microlending</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
+							<li class="active">
+								<a href="applyForLoan.html">Apply for Loan</a>
+							</li>
+							<li>
+								<a href="myLoans.html">My Loans</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="wrap">
+			<div id="slidersContainer" class="container" style="">
+
+				<div id="innerSlidersContainer" class="container-fluid">
+					<div class="row-fluid">
+						<div class="span9" style="padding-right: 30px;">
+							<form method="post">
+								<div>
+									<p>
+										<span>Amount:</span>
+										<input type="text" id="amount" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
+									</p>
+									<div id="amountSlider"></div>
+								</div>
+
+								<div style="padding-top: 30px;">
+									<p>
+										<span>Term:</span>
+										<input type="text" id="term" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
+									</p>
+									<div id="termSlider" ></div>
+								</div>
+
+								<div style="height: 30px"></div>
+
+								<div style="text-align: center">
+									<button class="btn btn-large btn-primary" type="submit">
+										Apply for Loan
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="span3">
+							<div class="verticalLine" style="height: 200px">
+								<table id="loanDetailsTable">
+									<caption>Loan Details</caption>
+									<tr>
+										<td>Loan Amount:</td>
+										<td id="detailsAmount" class="loanDetailsTableValue"></td>
+									</tr>
+									<tr>
+										<td>Loan Term:</td>
+										<td id="detailsTerm" class="loanDetailsTableValue"></td>
+									</tr>
+									<tr id="dueDateRow" class="returnRow">
+										<td>Due Date:</td>
+										<td id="detailsDueDate" class="loanDetailsTableValue"></td>
+									</tr>
+									<tr class="returnRow">
+										<td>Return Amount:</td>
+										<td id="detailsReturnAmount" class="loanDetailsTableValue"></td>
+									</tr>									
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer">
+			<div class="container">
+				<p class="muted credit">
+					<span><a href="http://lv.linkedin.com/pub/vitalijs-shakels/10/199/8b9" >Vitalijs Shakels</a>, 2013</span>
+				</p>
+			</div>
+		</div>
+
+		<!--javascript -->
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>		
+		<script src="js/pages/applyForLoan.js"></script>
+		<script src="js/utils/dateUtils.js"></script>
+		<script src="js/utils/microlendingUtils.js"></script>
+		<script src="js/service/microlendingService.js"></script>
+	</body>
+
+</html>
