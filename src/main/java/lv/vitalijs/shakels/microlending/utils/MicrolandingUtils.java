@@ -5,5 +5,9 @@ import java.math.BigDecimal;
 public class MicrolandingUtils {
 	
 	public static final BigDecimal INTEREST = new BigDecimal(0.01);
+	
+	public static final BigDecimal MAX_LOAN_AMOUT = new BigDecimal(200);
+	
+	public static final Integer MAX_LOAN_TERM = 30;
 
 }

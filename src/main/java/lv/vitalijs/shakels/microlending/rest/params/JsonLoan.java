@@ -6,18 +6,18 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class JsonLoan {
-	
+public class JsonLoan implements Cloneable {
+
 	private BigDecimal amount;
-	
+
 	private Integer term;
-	
+
 	private BigDecimal interest;
-	
+
 	private Date dueDate;
-	
+
 	private Date creationDate;
-	
+
 	private String ipAddress;
 
 	public BigDecimal getAmount() {
@@ -67,5 +67,16 @@ public class JsonLoan {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-	
+
+	public JsonLoan clone() {
+		JsonLoan clone = new JsonLoan();
+		clone.amount = this.amount;
+		clone.term = this.term;
+		clone.interest = this.interest;
+		clone.dueDate = (Date) this.dueDate.clone();
+		clone.creationDate = (Date) this.creationDate.clone();
+		clone.ipAddress = this.ipAddress;		
+		return clone;
+	}
+
 }

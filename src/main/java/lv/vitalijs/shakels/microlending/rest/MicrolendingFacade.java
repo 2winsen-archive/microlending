@@ -7,18 +7,24 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import lv.vitalijs.shakels.microlending.bo.Loan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
 import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
+import lv.vitalijs.shakels.microlending.validators.LoanValidator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @Path("/")
 public class MicrolendingFacade {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MicrolendingFacade.class);
 
 	@Autowired
 	private RiskService riskService;
@@ -30,21 +36,31 @@ public class MicrolendingFacade {
 	@Path("/getServerConstants")
 	@Produces(MediaType.APPLICATION_JSON)
 	public JsonServerData getServerConstants() {
+		logger.info("getServerConstants - called successfully");
 		JsonServerData data = new JsonServerData();
 		data.setInterest(MicrolandingUtils.INTEREST);
+		data.setMaxLoanAmount(MicrolandingUtils.MAX_LOAN_AMOUT);
+		data.setMaxLoanTerm(MicrolandingUtils.MAX_LOAN_TERM);
 		return data;
 	}
 	
 	@POST
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void takeLoan(JsonLoan loan) {
-		String result = null;
-		if (!riskService.isHighRisk()) {
-			loanService.saveLoan(null);
-		} else {
-			result = "HIGH RISK";
+	public String takeLoan(JsonLoan jsonLoan) {
+		logger.info("takeLoan - called successfully");
+		if (LoanValidator.valid(jsonLoan)) {
+			Loan loan = (Loan)jsonLoan.clone();
+			if (!riskService.isHighRisk(loan)) {
+				try {
+					loanService.saveLoan(null);
+				} catch (Exception e) {
+					
+				}
+			} else {
+			}	
 		}
+		return "hhh";
 	}
 	
 //	@GET

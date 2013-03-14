@@ -17,7 +17,7 @@ function getServerConstantsCompleteHandler() {
 		value : 5,
 		step : 5,
 		min : 5,
-		max : 200,
+		max : MAX_LOAN_AMOUNT,
 		slide : function(event, ui) {
 			amount.val(CURRENCY + " " + ui.value);
 			detailsAmount.text(amount.val());
@@ -35,7 +35,7 @@ function getServerConstantsCompleteHandler() {
 	var detailsTerm = $("#detailsTerm");
 	var detailsDueDate = $("#detailsDueDate");
 	var termStep = 1;
-	var termMax = 30;
+	var termMax = MAX_LOAN_TERM;
 
 	var tomorrow = getTommorowDate();
 

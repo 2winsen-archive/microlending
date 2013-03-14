@@ -12,6 +12,8 @@ function getServerConstants(completeHandler) {
 		dataType: "json",
 		success: function(data) {
 			INTEREST = data.interest;
+			MAX_LOAN_AMOUNT = data.maxLoanAmount;
+			MAX_LOAN_TERM = data.maxLoanTerm;
 		},
 		complete: completeHandler
 	});
