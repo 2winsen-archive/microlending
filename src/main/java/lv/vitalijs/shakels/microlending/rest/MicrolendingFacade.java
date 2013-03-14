@@ -1,5 +1,7 @@
 package lv.vitalijs.shakels.microlending.rest;
 
+import java.util.Date;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,20 +42,23 @@ public class MicrolendingFacade {
 		JsonServerData data = new JsonServerData();
 		data.setInterest(MicrolandingUtils.INTEREST);
 		data.setMaxLoanAmount(MicrolandingUtils.MAX_LOAN_AMOUT);
+		data.setMinLoanAmount(MicrolandingUtils.MIN_LOAN_AMOUT);
 		data.setMaxLoanTerm(MicrolandingUtils.MAX_LOAN_TERM);
+		data.setMinLoanTerm(MicrolandingUtils.MIN_LOAN_TERM);
 		return data;
 	}
-	
+
 	@POST
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String takeLoan(JsonLoan jsonLoan) {
 		logger.info("takeLoan - called successfully");
-		if (LoanValidator.valid(jsonLoan)) {
-			Loan loan = (Loan)jsonLoan.clone();
+		if (LoanValidator.isValid(jsonLoan)) {
+			Loan loan = new Loan(jsonLoan);
+			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {
-					loanService.saveLoan(null);
+					loanService.processLoan(null);
 				} catch (Exception e) {
 					
 				}

@@ -1,25 +1,32 @@
 package lv.vitalijs.shakels.microlending.rest.params;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class JsonLoan implements Cloneable {
+public class JsonLoan {
 
 	private BigDecimal amount;
 
 	private Integer term;
 
-	private BigDecimal interest;
-
-	private Date dueDate;
-
-	private Date creationDate;
-
 	private String ipAddress;
+	
+	public JsonLoan() {
+	}
+	
+	public JsonLoan(JsonLoan jsonLoan) {
+		this(jsonLoan.amount, jsonLoan.term, jsonLoan.ipAddress);
+	}
 
+	public JsonLoan(BigDecimal amount, Integer term, String ipAddress) {
+		super();
+		this.amount = amount;
+		this.term = term;
+		this.ipAddress = ipAddress;
+	}
+	
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -36,30 +43,6 @@ public class JsonLoan implements Cloneable {
 		this.term = term;
 	}
 
-	public BigDecimal getInterest() {
-		return interest;
-	}
-
-	public void setInterest(BigDecimal interest) {
-		this.interest = interest;
-	}
-
-	public Date getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
 	public String getIpAddress() {
 		return ipAddress;
 	}
@@ -68,15 +51,5 @@ public class JsonLoan implements Cloneable {
 		this.ipAddress = ipAddress;
 	}
 
-	public JsonLoan clone() {
-		JsonLoan clone = new JsonLoan();
-		clone.amount = this.amount;
-		clone.term = this.term;
-		clone.interest = this.interest;
-		clone.dueDate = (Date) this.dueDate.clone();
-		clone.creationDate = (Date) this.creationDate.clone();
-		clone.ipAddress = this.ipAddress;		
-		return clone;
-	}
 
 }

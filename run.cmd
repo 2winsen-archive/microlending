@@ -1,1 +1,1 @@
-mvn jetty:run
+mvn clean package jetty:run

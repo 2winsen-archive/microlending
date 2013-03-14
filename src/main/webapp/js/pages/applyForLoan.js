@@ -2,10 +2,10 @@
 var cachedDueDate;
 
 $(function() {
-	getServerConstants(getServerConstantsCompleteHandler);
+	getServerConstants(prepareApplyForLoan);
 });
 
-function getServerConstantsCompleteHandler() {
+function prepareApplyForLoan() {
 	var amountSlider = $("#amountSlider");
 	var amount = $("#amount");
 	var detailsAmount = $("#detailsAmount");
@@ -14,9 +14,9 @@ function getServerConstantsCompleteHandler() {
 
 	amountSlider.slider({
 		range : "min",
-		value : 5,
+		value : MIN_LOAN_TERM,
 		step : 5,
-		min : 5,
+		min : MIN_LOAN_AMOUNT,
 		max : MAX_LOAN_AMOUNT,
 		slide : function(event, ui) {
 			amount.val(CURRENCY + " " + ui.value);
@@ -25,6 +25,9 @@ function getServerConstantsCompleteHandler() {
 			// Return amount
 			detailsReturnAmount.text(getReturnAmount(ui.value, termSlider
 					.slider("value")));
+		},
+		stop: function(event, ui) {
+			console.log("gu");
 		}
 	});
 	amount.val(CURRENCY + " " + amountSlider.slider("value"));
@@ -42,9 +45,9 @@ function getServerConstantsCompleteHandler() {
 	var lastSliderValue = 0;
 	termSlider.slider({
 		range : "min",
-		value : 1,
+		value : MIN_LOAN_TERM,
 		step : termStep,
-		min : 1,
+		min : MIN_LOAN_TERM,
 		max : termMax,
 		start : function(event, ui) {
 			lastSliderValue = ui.value;
@@ -84,22 +87,18 @@ function getServerConstantsCompleteHandler() {
 			termSlider.slider("value")));
 }
 
+$('#applyForLoanButton').click(function() {
+	var loan = JSON.stringify({
+		"amount" : $("#amountSlider").slider("value"),
+		"term" : $("#termSlider").slider("value"),
+		"ipAddress" : IP_ADDRESS ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
+	});
+	takeLoan(loan);
+});
+
 function getReturnAmount(amount, term) {
 	var interest = INTEREST * term;
 	var result = amount + (amount * interest);
 	return CURRENCY + " "
 			+ (Math.round(result * 100) / 100).toFixed(NUM_DECIMALS);
-
-}
-
-function applyForLoan() {
-	var loan = JSON.stringify({
-		"amount" : $("#amountSlider").slider("value"),
-		"term" : $("#termSlider").slider("value"),
-		"interest" : $("#termSlider").slider("value") * INTEREST,
-		"dueDate" : cachedDueDate,
-		"creationDate" : new Date(),
-		"ipAddress" : IP_ADDRESS
-	});
-	takeLoan(loan);
 }

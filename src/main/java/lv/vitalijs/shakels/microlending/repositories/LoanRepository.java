@@ -1,5 +1,8 @@
 package lv.vitalijs.shakels.microlending.repositories;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lv.vitalijs.shakels.microlending.bo.Loan;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,15 @@ public class LoanRepository {
 	
 	public Loan saveLoan(Loan loan) {
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Loan> getLoansByIP(String ip) {
+		List<Loan> loans = new ArrayList<Loan>();
+        String query = "select * from Loan loan where loan.ipAddress=?";
+        Object queryParam = ip;
+        loans = hibernateTemplate.find(query, queryParam);
+        return loans;		
 	}
 	
 

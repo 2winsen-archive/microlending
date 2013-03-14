@@ -11,7 +11,11 @@ public class JsonServerData {
 
 	private BigDecimal maxLoanAmount;
 
+	private BigDecimal minLoanAmount;
+
 	private int maxLoanTerm;
+
+	private int minLoanTerm;
 
 	public BigDecimal getInterest() {
 		return interest;
@@ -35,6 +39,22 @@ public class JsonServerData {
 
 	public void setMaxLoanTerm(int maxLoanTerm) {
 		this.maxLoanTerm = maxLoanTerm;
+	}
+
+	public BigDecimal getMinLoanAmount() {
+		return minLoanAmount;
+	}
+
+	public void setMinLoanAmount(BigDecimal minLoanAmount) {
+		this.minLoanAmount = minLoanAmount;
+	}
+
+	public int getMinLoanTerm() {
+		return minLoanTerm;
+	}
+
+	public void setMinLoanTerm(int minLoanTerm) {
+		this.minLoanTerm = minLoanTerm;
 	}
 
 }
