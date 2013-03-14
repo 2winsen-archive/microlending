@@ -13,23 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public class LoanRepository {
-	
+
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-	
-	
-	public Loan saveLoan(Loan loan) {
-		return null;
+
+	public void saveLoan(Loan loan) {
+		hibernateTemplate.persist(loan);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Loan> getLoansByIP(String ip) {
 		List<Loan> loans = new ArrayList<Loan>();
-        String query = "select * from Loan loan where loan.ipAddress=?";
-        Object queryParam = ip;
-        loans = hibernateTemplate.find(query, queryParam);
-        return loans;		
+		String query = "select loan from Loan loan where loan.ipAddress=?";
+		Object queryParam = ip;
+		loans = hibernateTemplate.find(query, queryParam);
+		return loans;
 	}
-	
 
 }

@@ -14,8 +14,8 @@ public class LoanServiceImpl implements LoanService {
 	private LoanRepository loanRepository;
 
 	@Override
-	public Loan processLoan(Loan loan) {
-		return null;
+	public void processLoan(Loan loan) {
+		// add calculation logic
 	}
 
 }

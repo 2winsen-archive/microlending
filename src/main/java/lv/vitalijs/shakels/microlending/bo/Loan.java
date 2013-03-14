@@ -11,29 +11,37 @@ import javax.persistence.Version;
 import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
 
 @Entity
-public class Loan extends JsonLoan {
+public class Loan {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
+	private BigDecimal amount;
+	
+	private Integer term;
+	
+	private String ipAddress;
+	
 	private BigDecimal interest;
 
 	private Date dueDate;
 
 	private Date creationDate;
-
-	@Version
-	private Integer version;
 	
+
 	public Loan() {
-		super();
 	}
 	
 	public Loan(JsonLoan jsonLoan) {
-		super(jsonLoan);
+		this.amount = jsonLoan.getAmount();
+		this.term = jsonLoan.getTerm();
+		this.ipAddress = jsonLoan.getIpAddress();
 	}
-
+	
+	@Version
+	private Integer version;
+	
 	public Long getId() {
 		return id;
 	}
@@ -72,6 +80,30 @@ public class Loan extends JsonLoan {
 
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public Integer getTerm() {
+		return term;
+	}
+
+	public void setTerm(Integer term) {
+		this.term = term;
+	}
+
+	public String getIpAddress() {
+		return ipAddress;
+	}
+
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
 }

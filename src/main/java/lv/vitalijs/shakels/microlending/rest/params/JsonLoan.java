@@ -13,20 +13,6 @@ public class JsonLoan {
 
 	private String ipAddress;
 	
-	public JsonLoan() {
-	}
-	
-	public JsonLoan(JsonLoan jsonLoan) {
-		this(jsonLoan.amount, jsonLoan.term, jsonLoan.ipAddress);
-	}
-
-	public JsonLoan(BigDecimal amount, Integer term, String ipAddress) {
-		super();
-		this.amount = amount;
-		this.term = term;
-		this.ipAddress = ipAddress;
-	}
-	
 	public BigDecimal getAmount() {
 		return amount;
 	}

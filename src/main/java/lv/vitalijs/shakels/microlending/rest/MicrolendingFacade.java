@@ -58,7 +58,7 @@ public class MicrolendingFacade {
 			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {
-					loanService.processLoan(null);
+					loanService.processLoan(loan);
 				} catch (Exception e) {
 					
 				}

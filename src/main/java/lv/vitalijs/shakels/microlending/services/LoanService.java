@@ -4,6 +4,6 @@ import lv.vitalijs.shakels.microlending.bo.Loan;
 
 public interface LoanService {
 	
-	Loan processLoan(Loan loan); 
+	void processLoan(Loan loan); 
 
 }
