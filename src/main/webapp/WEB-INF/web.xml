@@ -11,7 +11,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>lv.vitalijs.shakels.microlending.spring.config.ApplicationContextConfig,lv.vitalijs.shakels.microlending.spring.config.PersistenceConfig</param-value>
+		<param-value>lv.vitalijs.shakels.microlending.spring.config</param-value>
 	</context-param>
 
 	<listener>

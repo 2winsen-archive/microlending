@@ -6,8 +6,21 @@
 		</layout>
 	</appender>
 
+	<logger name="lv.vitalijs.shakels">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="INFO" />
+	</logger>
+
 	<root>
-		<level value="error" />
+		<level value="INFO" />
 		<appender-ref ref="STDOUT" />
 	</root>
+
 </configuration>

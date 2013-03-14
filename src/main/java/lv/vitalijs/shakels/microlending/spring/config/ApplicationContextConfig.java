@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ComponentScan({ "lv.vitalijs.shakels.microlending.facade",
-		"lv.vitalijs.shakels.microlending.services",
-		"lv.vitalijs.shakels.microlending.repositories" })
+@ComponentScan({"lv.vitalijs.shakels.microlending"})
 public class ApplicationContextConfig {
 
 	@Bean

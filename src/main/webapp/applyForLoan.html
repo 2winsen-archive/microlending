@@ -125,31 +125,29 @@
 				<div id="innerSlidersContainer" class="container-fluid">
 					<div class="row-fluid">
 						<div class="span9" style="padding-right: 30px;">
-							<form method="post">
-								<div>
-									<p>
-										<span>Amount:</span>
-										<input type="text" id="amount" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
-									</p>
-									<div id="amountSlider"></div>
-								</div>
+							<div>
+								<p>
+									<span>Amount:</span>
+									<input type="text" id="amount" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
+								</p>
+								<div id="amountSlider"></div>
+							</div>
 
-								<div style="padding-top: 30px;">
-									<p>
-										<span>Term:</span>
-										<input type="text" id="term" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
-									</p>
-									<div id="termSlider" ></div>
-								</div>
+							<div style="padding-top: 30px;">
+								<p>
+									<span>Term:</span>
+									<input type="text" id="term" style="border: 1; font-weight: bold; width: 60px;" readonly="true" />
+								</p>
+								<div id="termSlider" ></div>
+							</div>
 
-								<div style="height: 30px"></div>
+							<div style="height: 30px"></div>
 
-								<div style="text-align: center">
-									<button class="btn btn-large btn-primary" type="submit">
-										Apply for Loan
-									</button>
-								</div>
-							</form>
+							<div style="text-align: center">
+								<button class="btn btn-large btn-primary" type="button" onclick="applyForLoan()">
+									Apply for Loan
+								</button>
+							</div>
 						</div>
 						<div class="span3">
 							<div class="verticalLine" style="height: 200px">
@@ -170,7 +168,7 @@
 									<tr class="returnRow">
 										<td>Return Amount:</td>
 										<td id="detailsReturnAmount" class="loanDetailsTableValue"></td>
-									</tr>									
+									</tr>
 								</table>
 							</div>
 						</div>
@@ -188,6 +186,12 @@
 		</div>
 
 		<!--javascript -->
+		<script type="application/javascript">
+		    function getip(json){
+		      IP_ADDRESS = json.ip;
+		    }
+		</script>
+		<script type="application/javascript" src="http://jsonip.appspot.com/?callback=getip"></script>
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 		<script src="bootstrap/js/bootstrap.min.js"></script>		

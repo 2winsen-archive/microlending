@@ -1,3 +1,6 @@
+// Cashed
+var cachedDueDate;
+
 $(function() {
 	getServerConstants(getServerConstantsCompleteHandler);
 });
@@ -63,6 +66,7 @@ function getServerConstantsCompleteHandler() {
 				tempDate.setDate(tempDate.getDate() - (termMax - ui.value));
 			}
 			detailsDueDate.text(formatDate(tempDate));
+			cachedDueDate = tempDate;
 
 			// Return amount
 			detailsReturnAmount.text(getReturnAmount(amountSlider
@@ -75,15 +79,27 @@ function getServerConstantsCompleteHandler() {
 	term.val("Days " + termSlider.slider("value"));
 	detailsTerm.text(term.val());
 	detailsDueDate.text(formatDate(tomorrow));
+	cachedDueDate = getTommorowDate();
 	detailsReturnAmount.text(getReturnAmount(amountSlider.slider("value"),
 			termSlider.slider("value")));
 }
 
 function getReturnAmount(amount, term) {
-	// interest
 	var interest = INTEREST * term;
 	var result = amount + (amount * interest);
 	return CURRENCY + " "
 			+ (Math.round(result * 100) / 100).toFixed(NUM_DECIMALS);
 
+}
+
+function applyForLoan() {
+	var loan = JSON.stringify({
+		"amount" : $("#amountSlider").slider("value"),
+		"term" : $("#termSlider").slider("value"),
+		"interest" : $("#termSlider").slider("value") * INTEREST,
+		"dueDate" : cachedDueDate,
+		"creationDate" : new Date(),
+		"ipAddress" : IP_ADDRESS
+	});
+	takeLoan(loan);
 }

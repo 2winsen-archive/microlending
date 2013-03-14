@@ -1,19 +1,12 @@
-package lv.vitalijs.shakels.microlending.bo;
+package lv.vitalijs.shakels.microlending.rest.params;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-public class Loan {
-	
-	@Id
-	@GeneratedValue
-	private Long id;
+@XmlRootElement
+public class JsonLoan {
 	
 	private BigDecimal amount;
 	
@@ -26,17 +19,6 @@ public class Loan {
 	private Date creationDate;
 	
 	private String ipAddress;
-	
-	@Version
-	private Integer version;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public BigDecimal getAmount() {
 		return amount;
@@ -62,20 +44,20 @@ public class Loan {
 		this.interest = interest;
 	}
 
+	public Date getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 	public String getIpAddress() {
@@ -85,13 +67,5 @@ public class Loan {
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
 	}
-
-	public Date getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
-
+	
 }

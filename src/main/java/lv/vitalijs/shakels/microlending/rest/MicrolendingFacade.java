@@ -2,10 +2,12 @@ package lv.vitalijs.shakels.microlending.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
@@ -33,33 +35,31 @@ public class MicrolendingFacade {
 		return data;
 	}
 	
-	@GET
+	@POST
 	@Path("/takeLoan")
-	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String takeLoan() {
+	public void takeLoan(JsonLoan loan) {
 		String result = null;
 		if (!riskService.isHighRisk()) {
 			loanService.saveLoan(null);
 		} else {
 			result = "HIGH RISK";
 		}
-		return result;
 	}
 	
-	@GET
-	@Path("/extendLoan")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String extendLoan() {
-		return "ExtendLoan";
-	}
+//	@GET
+//	@Path("/extendLoan")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String extendLoan() {
+//		return "ExtendLoan";
+//	}
 	
-	@GET
-	@Path("/getLoansHistory")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getLoansHistory() {
-		return "LoansHistory";
-	}
+//	@GET
+//	@Path("/getLoansHistory")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String getLoansHistory() {
+//		return "LoansHistory";
+//	}
 	
 }
 
