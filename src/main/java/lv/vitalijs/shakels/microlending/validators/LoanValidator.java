@@ -3,7 +3,7 @@ package lv.vitalijs.shakels.microlending.validators;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
-import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
+import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
 
 public class LoanValidator {
@@ -13,7 +13,7 @@ public class LoanValidator {
 			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
-	public static boolean isValid(JsonLoan loan) {
+	public static boolean isValid(Loan loan) {
 		if (loan.getAmount() != null && isLoanAmountFromValidInterval(loan.getAmount()) ) {
 			return false;
 		}

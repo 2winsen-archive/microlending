@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
-
-import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class Loan {
 
 	@Id
@@ -18,32 +18,47 @@ public class Loan {
 	private Long id;
 
 	private BigDecimal amount;
-	
+
 	private Integer term;
-	
+
 	private String ipAddress;
-	
+
 	private BigDecimal interest;
-	
+
 	private BigDecimal returnAmount;
 
 	private Date dueDate;
 
 	private Date creationDate;
-	
+
+	@Version
+	private Integer version;
 
 	public Loan() {
 	}
-	
-	public Loan(JsonLoan jsonLoan) {
-		this.amount = jsonLoan.getAmount();
-		this.term = jsonLoan.getTerm();
-		this.ipAddress = jsonLoan.getIpAddress();
+
+	public Loan(Loan loan) {
+		this(loan.amount, loan.term, loan.ipAddress, loan.interest,
+				loan.returnAmount, loan.dueDate, loan.creationDate);
 	}
-	
-	@Version
-	private Integer version;
-	
+
+	public Loan(BigDecimal amount, Integer term, String ipAddress,
+			BigDecimal interest, BigDecimal returnAmount, Date dueDate,
+			Date creationDate) {
+		super();
+		this.amount = amount;
+		this.term = term;
+		this.ipAddress = ipAddress;
+		this.interest = interest;
+		this.returnAmount = returnAmount;
+		if (this.dueDate != null) {
+			this.dueDate = (Date) dueDate.clone();
+		}
+		if (this.creationDate != null) {
+			this.creationDate = (Date) creationDate.clone();
+		}
+	}
+
 	public Long getId() {
 		return id;
 	}

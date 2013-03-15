@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import lv.vitalijs.shakels.microlending.entities.Loan;
+
 @XmlRootElement
 public class JsonResponse {
 
@@ -14,7 +16,7 @@ public class JsonResponse {
 
 	private String error;
 
-	private List<?> results;
+	private List<Loan> results;
 
 	public String getPage() {
 		return page;
@@ -32,11 +34,11 @@ public class JsonResponse {
 		this.error = error;
 	}
 
-	public List<?> getResults() {
+	public List<Loan> getResults() {
 		return results;
 	}
 
-	public void setResults(List<?> list) {
+	public void setResults(List<Loan> list) {
 		this.results = list;
 	}
 

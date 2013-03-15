@@ -10,7 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import lv.vitalijs.shakels.microlending.entities.Loan;
-import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonResponse;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
@@ -55,11 +54,11 @@ public class MicrolendingFacade {
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public JsonResponse takeLoan(JsonLoan jsonLoan) {
+	public JsonResponse takeLoan(Loan paramLoan) {
 		logger.debug("takeLoan - called successfully");
 		JsonResponse response = new JsonResponse();
-		if (LoanValidator.isValid(jsonLoan)) {
-			Loan loan = new Loan(jsonLoan);
+		if (LoanValidator.isValid(paramLoan)) {
+			Loan loan = new Loan(paramLoan);
 			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {
