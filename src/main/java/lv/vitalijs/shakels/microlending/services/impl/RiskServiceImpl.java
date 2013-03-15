@@ -16,7 +16,7 @@ public class RiskServiceImpl implements RiskService {
 
 	private static final int RISK_TIME_MIN_LIMIT = 0;
 	private static final int RISK_TIME_MAX_LIMIT = 7;
-	
+
 	/**
 	 * Is 2 not 3 because 3rd loan is one that is not yet persisted
 	 */
@@ -43,7 +43,10 @@ public class RiskServiceImpl implements RiskService {
 	}
 
 	private boolean is3rdLoanFromSameIP(Loan loan) {
-		List<Loan> result = loanRepository.getLoansByIP(loan.getIpAddress());		
+		if (loan.getIpAddress().equals(MicrolandingUtils.UNKNOWN_IP_ADDRESS)) {
+			return false;
+		}
+		List<Loan> result = loanRepository.getLoansByIP(loan.getIpAddress());
 		return result.size() > RISK_MAX_SAME_IP;
 	}
 

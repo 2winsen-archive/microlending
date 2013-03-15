@@ -24,6 +24,8 @@ public class Loan {
 	private String ipAddress;
 	
 	private BigDecimal interest;
+	
+	private BigDecimal returnAmount;
 
 	private Date dueDate;
 
@@ -104,6 +106,14 @@ public class Loan {
 
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
+	}
+
+	public BigDecimal getReturnAmount() {
+		return returnAmount;
+	}
+
+	public void setReturnAmount(BigDecimal returnAmount) {
+		this.returnAmount = returnAmount;
 	}
 
 }
