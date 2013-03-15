@@ -29,5 +29,13 @@ public class LoanRepository {
 		loans = hibernateTemplate.find(query, queryParam);
 		return loans;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Loan> getAllLoans() throws DataAccessException {
+		List<Loan> loans = null;
+		String query = "select loan from Loan loan";
+		loans = hibernateTemplate.find(query);
+		return loans;
+	}
 
 }

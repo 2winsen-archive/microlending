@@ -34,3 +34,14 @@ function takeLoan(loan, successHandler, errorHandler) {
 		error: errorHandler
 	});
 }
+
+function getAllLoans(successHandler, errorHandler) {
+	console.log("getAllLoans");
+	$.ajax({
+		type: 'GET',
+		url: rootURL + "/getAllLoans",
+		dataType: "json",
+		success: successHandler,
+		error: errorHandler
+	});
+}

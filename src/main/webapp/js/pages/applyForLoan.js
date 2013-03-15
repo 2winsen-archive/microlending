@@ -98,7 +98,7 @@ $('#applyForLoanButton').click(function() {
 
 function takeLoanSuccessHandler(data) {
 	if (data.error != null) {
-		showErrorMessage();
+		showErrorMessage(data);
 		return;
 	}
 	if (data.page != null) {
@@ -107,10 +107,11 @@ function takeLoanSuccessHandler(data) {
 }
 
 function takeLoanErrorHandler(data) {
-	showErrorMessage();
+	showErrorMessage(data);
 }
 
-function showErrorMessage() {
+function showErrorMessage(data) {
+	$("#applyForLoanAlertMessage").text(data.error);
 	$("#applyForLoanAlert").show();
 }
 

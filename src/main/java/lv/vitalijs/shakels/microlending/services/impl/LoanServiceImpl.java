@@ -3,6 +3,7 @@ package lv.vitalijs.shakels.microlending.services.impl;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.repositories.LoanRepository;
@@ -25,6 +26,11 @@ public class LoanServiceImpl implements LoanService {
 		loan.setReturnAmount(calculateReturnAmount(loan));
 		loan.setDueDate(calculateDueDate(loan));
 		loanRepository.saveLoan(loan);
+	}
+	
+	@Override
+	public List<Loan> getAllLoans() throws DataAccessException {
+		return loanRepository.getAllLoans();
 	}
 	
 	private BigDecimal calculateReturnAmount(Loan loan) {

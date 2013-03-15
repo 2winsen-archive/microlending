@@ -76,18 +76,26 @@ public class MicrolendingFacade {
 		return response;
 	}
 
+	@GET
+	@Path("/getAllLoans")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonResponse getAllLoans() {
+		logger.debug("takeLoan - called successfully");
+		JsonResponse response = new JsonResponse();
+		try {
+			response.setResults(loanService.getAllLoans());
+		} catch (DataAccessException e) {
+			logger.error(e.getMessage());
+			response.setError("Server side error has occured, please try again later.");
+		}
+		return response;
+	}
+
 	// @GET
 	// @Path("/extendLoan")
 	// @Produces(MediaType.APPLICATION_JSON)
 	// public String extendLoan() {
 	// return "ExtendLoan";
-	// }
-
-	// @GET
-	// @Path("/getLoansHistory")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public String getLoansHistory() {
-	// return "LoansHistory";
 	// }
 
 }
