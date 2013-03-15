@@ -69,7 +69,7 @@ public class PersistenceConfig {
 		AnnotationSessionFactoryBean asfb = new AnnotationSessionFactoryBean();
 		asfb.setDataSource(getDataSource());
 		asfb.setHibernateProperties(getHibernateProperties());
-		asfb.setPackagesToScan(new String[] { "lv.vitalijs.shakels.microlending.bo" });
+		asfb.setPackagesToScan(new String[] { "lv.vitalijs.shakels.microlending.entities" });
 		return asfb;
 	}
 

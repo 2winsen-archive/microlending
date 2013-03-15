@@ -91,7 +91,7 @@ $('#applyForLoanButton').click(function() {
 	var loan = JSON.stringify({
 		"amount" : $("#amountSlider").slider("value"),
 		"term" : $("#termSlider").slider("value"),
-		"ipAddress" : IP_ADDRESS ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
+		"ipAddress" : (IP_ADDRESS != undefined) ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
 	});
 	takeLoan(loan);
 });

@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import lv.vitalijs.shakels.microlending.bo.Loan;
+import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
@@ -20,25 +20,27 @@ import lv.vitalijs.shakels.microlending.validators.LoanValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 @Component
 @Path("/")
 public class MicrolendingFacade {
-	
-	private static final Logger logger = LoggerFactory.getLogger(MicrolendingFacade.class);
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(MicrolendingFacade.class);
 
 	@Autowired
 	private RiskService riskService;
-	
+
 	@Autowired
 	private LoanService loanService;
-	
+
 	@GET
 	@Path("/getServerConstants")
 	@Produces(MediaType.APPLICATION_JSON)
 	public JsonServerData getServerConstants() {
-		logger.info("getServerConstants - called successfully");
+		logger.debug("getServerConstants - called successfully");
 		JsonServerData data = new JsonServerData();
 		data.setInterest(MicrolandingUtils.INTEREST);
 		data.setMaxLoanAmount(MicrolandingUtils.MAX_LOAN_AMOUT);
@@ -52,35 +54,34 @@ public class MicrolendingFacade {
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String takeLoan(JsonLoan jsonLoan) {
-		logger.info("takeLoan - called successfully");
+		logger.debug("takeLoan - called successfully");
 		if (LoanValidator.isValid(jsonLoan)) {
 			Loan loan = new Loan(jsonLoan);
 			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {
 					loanService.processLoan(loan);
-				} catch (Exception e) {
-					
+				} catch (DataAccessException e) {
+					logger.error(e.getMessage());
 				}
 			} else {
-			}	
+			}
 		}
 		return "hhh";
 	}
-	
-//	@GET
-//	@Path("/extendLoan")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String extendLoan() {
-//		return "ExtendLoan";
-//	}
-	
-//	@GET
-//	@Path("/getLoansHistory")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String getLoansHistory() {
-//		return "LoansHistory";
-//	}
-	
-}
 
+	// @GET
+	// @Path("/extendLoan")
+	// @Produces(MediaType.APPLICATION_JSON)
+	// public String extendLoan() {
+	// return "ExtendLoan";
+	// }
+
+	// @GET
+	// @Path("/getLoansHistory")
+	// @Produces(MediaType.APPLICATION_JSON)
+	// public String getLoansHistory() {
+	// return "LoansHistory";
+	// }
+
+}

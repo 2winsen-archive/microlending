@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-import lv.vitalijs.shakels.microlending.bo.Loan;
+import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.repositories.LoanRepository;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +20,7 @@ public class LoanServiceImpl implements LoanService {
 	private LoanRepository loanRepository;
 
 	@Override
-	public void processLoan(Loan loan) {
+	public void processLoan(Loan loan) throws DataAccessException {
 		loan.setInterest(calculateInterest(loan));
 		loan.setReturnAmount(calculateReturnAmount(loan));
 		loan.setDueDate(calculateDueDate(loan));

@@ -1,4 +1,4 @@
-package lv.vitalijs.shakels.microlending.bo;
+package lv.vitalijs.shakels.microlending.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;

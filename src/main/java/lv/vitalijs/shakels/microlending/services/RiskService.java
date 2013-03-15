@@ -1,6 +1,6 @@
 package lv.vitalijs.shakels.microlending.services;
 
-import lv.vitalijs.shakels.microlending.bo.Loan;
+import lv.vitalijs.shakels.microlending.entities.Loan;
 
 public interface RiskService {
 	
