@@ -93,8 +93,26 @@ $('#applyForLoanButton').click(function() {
 		"term" : $("#termSlider").slider("value"),
 		"ipAddress" : (IP_ADDRESS != undefined) ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
 	});
-	takeLoan(loan);
+	takeLoan(loan, takeLoanSuccessHandler, takeLoanErrorHandler);
 });
+
+function takeLoanSuccessHandler(data) {
+	if (data.error != null) {
+		showErrorMessage();
+		return;
+	}
+	if (data.page != null) {
+		window.location.href = data.page;
+	}
+}
+
+function takeLoanErrorHandler(data) {
+	showErrorMessage();
+}
+
+function showErrorMessage() {
+	$("#applyForLoanAlert").show();
+}
 
 function getReturnAmount(amount, term) {
 	var interest = INTEREST * term;

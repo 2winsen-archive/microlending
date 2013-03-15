@@ -7,95 +7,10 @@
 		<!-- CSS -->
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<style type="text/css">
-			/* Sticky footer styles
-			 -------------------------------------------------- */
-
-			html, body {
-				height: 100%;
-				/* The html and body elements cannot have any padding or margin. */
-			}
-
-			#slidersContainer {
-				padding-top: 60px;
-			}
-
-			#innerSlidersContainer {
-				border-style: solid;
-				border-width: 1px;
-				padding: 40px 40px 10px 40px;
-				margin-top: 40px;
-				border-radius: 15px;
-			}
-
-			/* Wrapper for page content to push down footer */
-			#wrap {
-				min-height: 100%;
-				height: auto !important;
-				height: 100%;
-				/* Negative indent footer by it's height */
-				margin: 0 auto -60px;
-			}
-
-			/* Set the fixed height of the footer here */
-			#footer {
-				height: 60px;
-			}
-			#footer {
-				background-color: #E9E9E9;
-			}
-
-			/* Custom page CSS
-			 -------------------------------------------------- */
-			/* Not required for template or sticky footer method. */
-				.container {
-					width: auto;
-					max-width: 900px;
-				}
-				.container .credit {
-					margin: 20px 0;
-				}
-
-				.verticalLine {
-					border-left: thin solid #BFBFBF;
-					padding-left: 10px;
-					margin-left: -20px;
-				}
-
-				#loanDetailsTable {
-					width: 100%;
-				}
-
-				#loanDetailsTable caption {
-					height: 40px;
-					font-weight: bold;
-					font-size: 130%;
-				}
-
-				#loanDetailsTable td {
-					height: 40px;
-				}
-
-				.loanDetailsTableValue {
-					color: #7c767c;
-					font-weight: bold;
-					font-size: 110%;
-					text-align: right;
-				}
-
-				#dueDateRow {
-					border-top: thin solid #BFBFBF;
-				}
-				
-				.returnRow {
-					font-weight: bold;
-				}
-
-		</style>
+		<link href="css/style.css" rel="stylesheet" media="screen">
 	</head>
 
 	<body>
-
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
@@ -120,10 +35,13 @@
 		</div>
 
 		<div id="wrap">
-			<div id="slidersContainer" class="container" style="">
-
+			<div id="slidersContainer" class="container">
 				<div id="innerSlidersContainer" class="container-fluid">
-					<div class="row-fluid">
+				<div id="applyForLoanAlert" class="alert" style="display: none;">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Warning!</strong><span>Best check yo self, you're not looking too good.</span>
+				</div>
+				<div class="row-fluid">
 						<div class="span9" style="padding-right: 30px;">
 							<div>
 								<p>

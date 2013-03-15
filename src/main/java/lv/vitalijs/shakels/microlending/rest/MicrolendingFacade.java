@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonLoan;
+import lv.vitalijs.shakels.microlending.rest.params.JsonResponse;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
@@ -53,21 +54,26 @@ public class MicrolendingFacade {
 	@POST
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String takeLoan(JsonLoan jsonLoan) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public JsonResponse takeLoan(JsonLoan jsonLoan) {
 		logger.debug("takeLoan - called successfully");
+		JsonResponse response = new JsonResponse();
 		if (LoanValidator.isValid(jsonLoan)) {
 			Loan loan = new Loan(jsonLoan);
 			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {
 					loanService.processLoan(loan);
+					response.setPage(JsonResponse.PAGE_MYLOANS);
 				} catch (DataAccessException e) {
 					logger.error(e.getMessage());
+					response.setError("Server side error has occured, please try again later.");
 				}
 			} else {
+				response.setPage(JsonResponse.PAGE_REJECT);
 			}
 		}
-		return "hhh";
+		return response;
 	}
 
 	// @GET

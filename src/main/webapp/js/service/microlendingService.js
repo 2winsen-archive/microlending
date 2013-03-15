@@ -22,16 +22,15 @@ function getServerConstants(completeHandler) {
 	});
 }
 
-function takeLoan(loan) {
+function takeLoan(loan, successHandler, errorHandler) {
 	console.log("takeLoan");
 	$.ajax({
 		type: 'POST',
 		url: rootURL + "/takeLoan",
+		dataType: "json",
 		contentType: "application/json",
 		data: loan,
-		success: function(data) {
-			console.log("Oh hai");			
-		},
+		success: successHandler,
+		error: errorHandler
 	});
 }
-

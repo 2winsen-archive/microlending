@@ -37,5 +37,4 @@ public class JsonLoan {
 		this.ipAddress = ipAddress;
 	}
 
-
 }
