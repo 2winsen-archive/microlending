@@ -47,6 +47,7 @@
 							<th>Loan Interest</th>
 							<th>Due Date</th>
 							<th>Return Amount</th>
+							<th>Extended?</th>
 						</tr>
 						{{#items}}
 							<tr id="{{data.id}}row">
@@ -57,6 +58,7 @@
 								<td>{{data.interest}}</td>
 								<td>{{data.dueDate}}</td>
 								<td>{{data.returnAmount}}</td>
+								<td></td>
 								<td><button id="{{data.id}}button" class="btn btn-primary" type="button">Extend</button></td>
 							<tr>
 						{{/items}}

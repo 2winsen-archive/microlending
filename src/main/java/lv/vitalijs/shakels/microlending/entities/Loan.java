@@ -30,6 +30,8 @@ public class Loan {
 	private Date dueDate;
 
 	private Date creationDate;
+	
+	private Boolean extended;
 
 	@Version
 	private Integer version;
@@ -129,6 +131,14 @@ public class Loan {
 
 	public void setReturnAmount(BigDecimal returnAmount) {
 		this.returnAmount = returnAmount;
+	}
+
+	public Boolean getExtended() {
+		return extended;
+	}
+
+	public void setExtended(Boolean extended) {
+		this.extended = extended;
 	}
 
 }
