@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,8 +29,14 @@ public class Loan {
 	private BigDecimal returnAmount;
 
 	private Date dueDate;
+	
+	@Transient
+	private Long dueDateMillis;
 
 	private Date creationDate;
+	
+	@Transient
+	private Long creationDateMillis;
 	
 	private Boolean extended;
 
@@ -139,6 +146,22 @@ public class Loan {
 
 	public void setExtended(Boolean extended) {
 		this.extended = extended;
+	}
+
+	public Long getDueDateMillis() {
+		return dueDateMillis;
+	}
+
+	public void setDueDateMillis(Long dueDateMillis) {
+		this.dueDateMillis = dueDateMillis;
+	}
+
+	public Long getCreationDateMillis() {
+		return creationDateMillis;
+	}
+
+	public void setCreationDateMillis(Long creationDateMillis) {
+		this.creationDateMillis = creationDateMillis;
 	}
 
 }

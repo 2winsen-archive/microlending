@@ -33,23 +33,23 @@ public class RiskServiceImpl implements RiskService {
 	private LoanRepository loanRepository;
 
 	@Override
-	public boolean isHighRisk(Loan loan) {
+	public boolean isHighRisk(final Loan loan) {
 		return (isLoanMadeFromMidnightTillSeven(loan) && isLoanWithMaximumAmount(loan))
 				|| is3rdLoanFromSameIP(loan);
 	}
 
-	private boolean isLoanMadeFromMidnightTillSeven(Loan loan) {
+	private boolean isLoanMadeFromMidnightTillSeven(final Loan loan) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(loan.getCreationDate());
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
 		return hours >= RISK_TIME_MIN_LIMIT && hours <= RISK_TIME_MAX_LIMIT;
 	}
 
-	private boolean isLoanWithMaximumAmount(Loan loan) {
+	private boolean isLoanWithMaximumAmount(final Loan loan) {
 		return loan.getAmount().equals(MicrolandingUtils.MAX_LOAN_AMOUT);
 	}
 
-	private boolean is3rdLoanFromSameIP(Loan loan) {
+	private boolean is3rdLoanFromSameIP(final Loan loan) {
 		List<Loan> result = new ArrayList<Loan>();
 		if (loan.getIpAddress().equals(MicrolandingUtils.UNKNOWN_IP_ADDRESS)) {
 			return false;

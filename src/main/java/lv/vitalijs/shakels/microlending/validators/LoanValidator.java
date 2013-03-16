@@ -13,7 +13,7 @@ public class LoanValidator {
 			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
-	public static boolean isValid(Loan loan) {
+	public static boolean isValid(final Loan loan) {
 		if (loan.getAmount() != null && isLoanAmountFromValidInterval(loan.getAmount()) ) {
 			return false;
 		}
@@ -27,12 +27,12 @@ public class LoanValidator {
 		return true;
 	}
 	
-	private static boolean isLoanAmountFromValidInterval(BigDecimal loanAmount) {
+	private static boolean isLoanAmountFromValidInterval(final BigDecimal loanAmount) {
 		return (loanAmount.compareTo(MicrolandingUtils.MAX_LOAN_AMOUT) == 1
 				|| loanAmount.compareTo(MicrolandingUtils.MIN_LOAN_AMOUT) == -1);
 	}
 	
-	private static boolean isLoanTermFromValidInterval(Integer loanTerm) {
+	private static boolean isLoanTermFromValidInterval(final Integer loanTerm) {
 		return (loanTerm.compareTo(MicrolandingUtils.MAX_LOAN_TERM) == 1
 				|| loanTerm.compareTo(MicrolandingUtils.MIN_LOAN_TERM) == -1);
 	}

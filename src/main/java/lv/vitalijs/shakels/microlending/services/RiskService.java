@@ -4,6 +4,6 @@ import lv.vitalijs.shakels.microlending.entities.Loan;
 
 public interface RiskService {
 	
-	boolean isHighRisk(Loan loan);
+	boolean isHighRisk(final Loan loan);
 
 }

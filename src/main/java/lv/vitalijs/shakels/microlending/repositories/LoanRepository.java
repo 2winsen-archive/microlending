@@ -17,12 +17,12 @@ public class LoanRepository {
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
-	public void saveLoan(Loan loan) throws DataAccessException {
+	public void saveLoan(final Loan loan) throws DataAccessException {
 		hibernateTemplate.persist(loan);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Loan> getLoansByIP(String ip) throws DataAccessException {
+	public List<Loan> getLoansByIP(final String ip) throws DataAccessException {
 		List<Loan> loans = null;
 		String query = "select loan from Loan loan where loan.ipAddress=?";
 		Object queryParam = ip;

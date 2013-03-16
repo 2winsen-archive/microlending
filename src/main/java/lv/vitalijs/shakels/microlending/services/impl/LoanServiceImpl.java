@@ -30,22 +30,32 @@ public class LoanServiceImpl implements LoanService {
 	
 	@Override
 	public List<Loan> getAllLoans() throws DataAccessException {
-		return loanRepository.getAllLoans();
+		List<Loan> loans = loanRepository.getAllLoans();
+		for (Loan loan : loans) {
+			includeDatesInMillis(loan);
+		}
+		return loans;
 	}
 	
-	private BigDecimal calculateReturnAmount(Loan loan) {
+	private BigDecimal calculateReturnAmount(final Loan loan) {
 		return loan.getAmount().multiply(loan.getInterest()).add(loan.getAmount());
 	}
 	
-	private Date calculateDueDate(Loan loan) {
+	private Date calculateDueDate(final Loan loan) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(loan.getCreationDate());
 		calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + loan.getTerm());
 		return calendar.getTime();
 	}
 	
-	private BigDecimal calculateInterest(Loan loan) {
+	private BigDecimal calculateInterest(final Loan loan) {
 		return MicrolandingUtils.INTEREST.multiply(new BigDecimal(loan.getTerm()));
+	}
+	
+	private Loan includeDatesInMillis(Loan loan) {
+		loan.setDueDateMillis(loan.getDueDate().getTime());
+		loan.setCreationDateMillis(loan.getCreationDate().getTime());
+		return loan;
 	}
 
 }

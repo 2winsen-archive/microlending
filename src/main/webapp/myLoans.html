@@ -32,9 +32,9 @@
 	<div id="wrap">
 		<div id="slidersContainer" class="container" style="">
 			<div id="innerSlidersContainer" class="container-fluid">
-				<div id="applyForLoanAlert" class="alert" style="display: none;">
+				<div id="myLoansAlert" class="alert alert-error" style="display: none;">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<strong>Warning!</strong><span>Best check yo self, you're not looking too good.</span>
+					<strong>Warning!</strong>&nbsp;<span id="myLoansAlertMessage"></span>
 				</div>
 				<div id="templateContainer" class="row-fluid">
 					<script id="loansTemplate" type="text/template">
@@ -52,14 +52,14 @@
 						{{#items}}
 							<tr id="{{data.id}}row">
 								<td>{{index}}</td>
-								<td>{{data.creationDate}}</td>
-								<td>{{data.amount}}</td>
+								<td>{{formatCreationDate}}</td>
+								<td>{{formatLoanAmount}}</td>
 								<td>{{data.term}}</td>
-								<td>{{data.interest}}</td>
-								<td>{{data.dueDate}}</td>
-								<td>{{data.returnAmount}}</td>
-								<td></td>
-								<td><button id="{{data.id}}button" class="btn btn-primary" type="button">Extend</button></td>
+								<td>{{formatLoanInterest}}</td>
+								<td>{{formatDueDate}}</td>
+								<td>{{formatReturnAmount}}</td>
+								<td>{{#data.extended}}EXTENED{{/data.extended}}</td>
+								<td style="padding-left: 40px;"><button id="{{data.id}}button" class="btn btn-primary" type="button">Extend</button></td>
 							<tr>
 						{{/items}}
 					</table>

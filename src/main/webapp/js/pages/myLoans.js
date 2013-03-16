@@ -14,8 +14,23 @@ function getAllLoansSuccessHandler(data) {
 		}
 		for (index in data.results) {
 			newResults.push({
-				'index' : parseInt(index) + 1,
-				'data' : data.results[index]
+				"index" : parseInt(index) + 1,
+				"data" : data.results[index],
+				"formatCreationDate" : function() {
+					return formatDate(new Date(parseInt(this.data.creationDateMillis)));
+				},
+				"formatDueDate" : function() {
+					return formatDate(new Date(parseInt(this.data.dueDateMillis)));
+				},
+				"formatLoanAmount" : function() {
+					return CURRENCY + " " + parseInt(this.data.amount);
+				},
+				"formatLoanInterest" : function() {
+					return this.data.interest*100 + "%";
+				},
+				"formatReturnAmount" : function() {
+					return CURRENCY + " " + this.data.returnAmount;
+				}
 			});
 		}
 		var template = $('#loansTemplate').html();
@@ -31,5 +46,6 @@ function getAllLoansErrorHandler(data) {
 }
 
 function showErrorMessage() {
-	$("#applyForLoanAlert").show();
+	$("#myLoansAlertMessage").text(data.error);
+	$("#myLoansAlert").show();
 }
