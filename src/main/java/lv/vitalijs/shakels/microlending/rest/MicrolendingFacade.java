@@ -69,7 +69,7 @@ public class MicrolendingFacade {
 					response.setError("Server side error has occured, please try again later.");
 				}
 			} else {
-				response.setPage(JsonResponse.PAGE_REJECT);
+				response.setError("Risk associated with your Loan it too high, sorry for inconveniences.");
 			}
 		}
 		return response;

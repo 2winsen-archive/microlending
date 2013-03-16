@@ -36,11 +36,33 @@
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 					<strong>Warning!</strong><span>Best check yo self, you're not looking too good.</span>
 				</div>
-				<script id="personTpl" type="text/template">
-					<h1>{{firstName}} {{lastName}}</h1>
-					<p>Blog URL: <a href="{{blogURL}}">{{blogURL}}</a></p>
+				<div id="templateContainer" class="row-fluid">
+					<script id="loansTemplate" type="text/template">
+					<table id="myLoansTable" class="table table-hover">
+						<tr>
+							<th>#</th>
+							<th>Creation Date</th>
+							<th>Loan Amount</th>
+							<th>Loan Term</th>
+							<th>Loan Interest</th>
+							<th>Due Date</th>
+							<th>Return Amount</th>
+						</tr>
+						{{#items}}
+							<tr id="{{data.id}}row">
+								<td>{{index}}</td>
+								<td>{{data.creationDate}}</td>
+								<td>{{data.amount}}</td>
+								<td>{{data.term}}</td>
+								<td>{{data.interest}}</td>
+								<td>{{data.dueDate}}</td>
+								<td>{{data.returnAmount}}</td>
+								<td><button id="{{data.id}}button" class="btn btn-primary" type="button">Extend</button></td>
+							<tr>
+						{{/items}}
+					</table>
 				</script>
-				<div class="row-fluid"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -56,6 +78,7 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="mustashe/mustache.js"></script>
 	<script src="js/pages/myLoans.js"></script>
 	<script src="js/utils/dateUtils.js"></script>
 	<script src="js/utils/microlendingUtils.js"></script>

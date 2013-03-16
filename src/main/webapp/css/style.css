@@ -79,3 +79,13 @@ html,body {
 .returnRow {
 	font-weight: bold;
 }
+
+#myLoansTable th {
+	font-size: 110%;
+	vertical-align: bottom;
+}
+
+#myLoansTable td {
+	vertical-align: middle;
+	height: 60px;
+}
