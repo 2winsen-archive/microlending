@@ -41,9 +41,22 @@ function getAllLoansSuccessHandler(data) {
 	} else {
 		$("#templateContainer").html("<h3>There are no active loans...</h3>").css("text-align", "center");
 	}
+	$("#applyForLoanButtonContainer").html("<button id='applyForLoanButton' class='btn btn-large btn-primary' type='button' onClick='redirectToApplyForLoan()'>Apply for Loan?</button>");
 }
 
 function getAllLoansErrorHandler(data) {
+	showErrorMessage();
+}
+
+function extendLoanSuccessHandler(data) {
+	console.log("extendLoanSuccessHandler");
+	if (data.results != null) {
+		var rowSelector = "#rowId" + data.results.id;
+		$(rowSelector).css("color", "red"); 
+	}
+}
+
+function extendLoanErrorHandler(data) {
 	showErrorMessage();
 }
 
@@ -56,6 +69,10 @@ function showErrorMessage() {
 // EVENTS
 // =======================================
 
-$('#applyForLoanButton').click(function() {
+function redirectToApplyForLoan() {
 	window.location.href = "applyForLoan.html";
-});
+}
+
+function extendLoanEvent(id) {
+	extendLoan(id, extendLoanSuccessHandler, extendLoanErrorHandler);
+}

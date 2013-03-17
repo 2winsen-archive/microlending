@@ -49,7 +49,7 @@
 							<th>Extended?</th>
 						</tr>
 						{{#items}}
-							<tr id="{{data.id}}row">
+							<tr id="rowId{{data.id}}">
 								<td>{{index}}</td>
 								<td>{{formatCreationDate}}</td>
 								<td>{{formatLoanAmount}}</td>
@@ -58,14 +58,13 @@
 								<td>{{formatDueDate}}</td>
 								<td>{{formatReturnAmount}}</td>
 								<td>{{#data.extended}}EXTENED{{/data.extended}}</td>
-								<td style="padding-left: 40px;"><button id="{{data.id}}button" class="btn btn-primary" type="button">Extend</button></td>
+								<td style="padding-left: 40px;"><button class="btn btn-primary" type="button" onClick="extendLoanEvent({{data.id}})">Extend</button></td>
 							<tr>
 						{{/items}}
 					</table>
 				</script>
 				</div>
-				<div style="text-align: center;">
-					<button id="applyForLoanButton" class="btn btn-large btn-primary" type="button">Apply for Loan?</button>
+				<div id="applyForLoanButtonContainer" style="text-align: center;">
 				</div>
 			</div>
 		</div>

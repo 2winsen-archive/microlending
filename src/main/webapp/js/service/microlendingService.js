@@ -45,3 +45,15 @@ function getAllLoans(successHandler, errorHandler) {
 		error: errorHandler
 	});
 }
+
+function extendLoan(id, successHandler, errorHandler) {
+	console.log("extendLoan");
+	$.ajax({
+		type: 'POST',
+		url: rootURL + "/extendLoan/" + id,
+		dataType: "json",
+		contentType: "application/json",
+		success: successHandler,
+		error: errorHandler
+	});
+}

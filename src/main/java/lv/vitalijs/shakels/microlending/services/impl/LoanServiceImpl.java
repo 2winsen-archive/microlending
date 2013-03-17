@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoanServiceImpl implements LoanService {
 
-	private static double INTEREST_INCREASE_FACTOR = 0.5; 
+	private static double INTEREST_MULTIPLICATION_FACTOR = 2; 
 	
 	@Autowired
 	private LoanRepository loanRepository;
@@ -43,7 +43,7 @@ public class LoanServiceImpl implements LoanService {
 	public Loan extendLoan(Long id) throws DataAccessException {
 		Loan loan = loanRepository.getLoanbyId(id);
 		loan.setDueDate(DateUtils.shiftDateByDays(loan.getDueDate(), DateUtils.DAYS_IN_A_WEEK));
-		updateInterest(loan, INTEREST_INCREASE_FACTOR);
+		updateInterest(loan, INTEREST_MULTIPLICATION_FACTOR);
 		loan.setExtended(true);
 		loanRepository.updateLoan(loan);
 		return loan;
@@ -68,7 +68,8 @@ public class LoanServiceImpl implements LoanService {
 	}
 	
 	private Loan updateInterest(Loan loan, double interestFactor) {
-		loan.setInterest(loan.getInterest().add(new BigDecimal(interestFactor)));
+		// In requirements it is mentioned to multiply interest by 0.5, but by multiplying the number becomes smaller so I am multiplication it by 2 
+		loan.setInterest(loan.getInterest().multiply(new BigDecimal(interestFactor)));
 		loan.setReturnAmount(calculateReturnAmount(loan));
 		return loan;
 	}
