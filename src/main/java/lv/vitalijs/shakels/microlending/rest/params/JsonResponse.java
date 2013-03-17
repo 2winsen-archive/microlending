@@ -1,5 +1,6 @@
 package lv.vitalijs.shakels.microlending.rest.params;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,6 +41,13 @@ public class JsonResponse {
 
 	public void setResults(List<Loan> list) {
 		this.results = list;
+	}
+	
+	public void addToResults(Loan loan) {
+		if (results == null) {
+			results = new ArrayList<Loan>();
+		}
+		results.add(loan);
 	}
 
 }

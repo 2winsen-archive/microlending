@@ -1,25 +1,30 @@
 package lv.vitalijs.shakels.microlending.rest;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import lv.vitalijs.shakels.microlending.constants.MicrolandingConstants;
 import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.rest.params.JsonResponse;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
-import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
+import lv.vitalijs.shakels.microlending.spring.config.ApplicationContextConfig;
 import lv.vitalijs.shakels.microlending.validators.LoanValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +34,8 @@ public class MicrolendingFacade {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(MicrolendingFacade.class);
+	
+	private static final ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationContextConfig.class); 
 
 	@Autowired
 	private RiskService riskService;
@@ -42,11 +49,11 @@ public class MicrolendingFacade {
 	public JsonServerData getServerConstants() {
 		logger.debug("getServerConstants - called successfully");
 		JsonServerData data = new JsonServerData();
-		data.setInterest(MicrolandingUtils.INTEREST);
-		data.setMaxLoanAmount(MicrolandingUtils.MAX_LOAN_AMOUT);
-		data.setMinLoanAmount(MicrolandingUtils.MIN_LOAN_AMOUT);
-		data.setMaxLoanTerm(MicrolandingUtils.MAX_LOAN_TERM);
-		data.setMinLoanTerm(MicrolandingUtils.MIN_LOAN_TERM);
+		data.setInterest(MicrolandingConstants.INTEREST);
+		data.setMaxLoanAmount(MicrolandingConstants.MAX_LOAN_AMOUT);
+		data.setMinLoanAmount(MicrolandingConstants.MIN_LOAN_AMOUT);
+		data.setMaxLoanTerm(MicrolandingConstants.MAX_LOAN_TERM);
+		data.setMinLoanTerm(MicrolandingConstants.MIN_LOAN_TERM);
 		return data;
 	}
 
@@ -66,10 +73,10 @@ public class MicrolendingFacade {
 					response.setPage(JsonResponse.PAGE_MYLOANS);
 				} catch (DataAccessException e) {
 					logger.error(e.getMessage());
-					response.setError("Server side error has occured, please try again later.");
+					response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
 				}
 			} else {
-				response.setError("Risk associated with your Loan it too high, sorry for inconveniences.");
+				response.setError(context.getMessage("error.high.risk", null, Locale.getDefault()));
 			}
 		}
 		return response;
@@ -85,16 +92,25 @@ public class MicrolendingFacade {
 			response.setResults(loanService.getAllLoans());
 		} catch (DataAccessException e) {
 			logger.error(e.getMessage());
-			response.setError("Server side error has occured, please try again later.");
+			response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
 		}
 		return response;
 	}
 
-	// @GET
-	// @Path("/extendLoan")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public String extendLoan() {
-	// return "ExtendLoan";
-	// }
-
+	@POST
+	@Path("/extendLoan/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonResponse extendLoan(@PathParam("id") String id) {
+		logger.debug("extendLoan - called successfully");
+		JsonResponse response = new JsonResponse();
+		try {
+			response.addToResults(loanService.extendLoan(Long.parseLong(id)));
+		} catch (DataAccessException e) {
+			logger.error(e.getMessage());
+			response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
+		}
+        return response;
+    }
+	
 }

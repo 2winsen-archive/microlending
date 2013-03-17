@@ -11,5 +11,7 @@ public interface LoanService {
 	void processLoan(Loan loan) throws DataAccessException;
 	
 	List<Loan> getAllLoans() throws DataAccessException;
+	
+	Loan extendLoan(Long id) throws DataAccessException;
 
 }

@@ -17,7 +17,7 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@PropertySource({ "classpath:persistence.properties" })
+@PropertySource({"persistence.properties"})
 @EnableTransactionManagement
 public class PersistenceConfig {
 

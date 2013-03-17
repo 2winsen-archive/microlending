@@ -10,7 +10,7 @@ function getAllLoansSuccessHandler(data) {
 	var newResults = [];
 	if (data.results != null) {
 		if (!(data.results instanceof Array)) {
-			data.results = [data.results];
+			data.results = [ data.results ];
 		}
 		for (index in data.results) {
 			newResults.push({
@@ -26,7 +26,7 @@ function getAllLoansSuccessHandler(data) {
 					return CURRENCY + " " + parseInt(this.data.amount);
 				},
 				"formatLoanInterest" : function() {
-					return this.data.interest*100 + "%";
+					return (this.data.interest * 100).toFixed() + "%";
 				},
 				"formatReturnAmount" : function() {
 					return CURRENCY + " " + this.data.returnAmount;
@@ -34,7 +34,9 @@ function getAllLoansSuccessHandler(data) {
 			});
 		}
 		var template = $('#loansTemplate').html();
-		var html = Mustache.to_html(template, {items: newResults});
+		var html = Mustache.to_html(template, {
+			items : newResults
+		});
 		$('#templateContainer').html(html);
 	} else {
 		$("#templateContainer").html("<h3>There are no active loans...</h3>").css("text-align", "center");
@@ -49,3 +51,11 @@ function showErrorMessage() {
 	$("#myLoansAlertMessage").text(data.error);
 	$("#myLoansAlert").show();
 }
+
+
+// EVENTS
+// =======================================
+
+$('#applyForLoanButton').click(function() {
+	window.location.href = "applyForLoan.html";
+});

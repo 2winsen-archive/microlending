@@ -87,15 +87,6 @@ function prepareApplyForLoan() {
 			termSlider.slider("value")));
 }
 
-$('#applyForLoanButton').click(function() {
-	var loan = JSON.stringify({
-		"amount" : $("#amountSlider").slider("value"),
-		"term" : $("#termSlider").slider("value"),
-		"ipAddress" : (IP_ADDRESS != undefined) ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
-	});
-	takeLoan(loan, takeLoanSuccessHandler, takeLoanErrorHandler);
-});
-
 function takeLoanSuccessHandler(data) {
 	if (data.error != null) {
 		showErrorMessage(data);
@@ -121,3 +112,16 @@ function getReturnAmount(amount, term) {
 	return CURRENCY + " "
 			+ (Math.round(result * 100) / 100).toFixed(NUM_DECIMALS);
 }
+
+
+// EVENTS
+//=======================================
+
+$('#applyForLoanButton').click(function() {
+	var loan = JSON.stringify({
+		"amount" : $("#amountSlider").slider("value"),
+		"term" : $("#termSlider").slider("value"),
+		"ipAddress" : (IP_ADDRESS != undefined) ? IP_ADDRESS : UNKNOWN_IP_ADDRESS
+	});
+	takeLoan(loan, takeLoanSuccessHandler, takeLoanErrorHandler);
+});

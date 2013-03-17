@@ -3,8 +3,8 @@ package lv.vitalijs.shakels.microlending.validators;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+import lv.vitalijs.shakels.microlending.constants.MicrolandingConstants;
 import lv.vitalijs.shakels.microlending.entities.Loan;
-import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
 
 public class LoanValidator {
 
@@ -28,12 +28,12 @@ public class LoanValidator {
 	}
 	
 	private static boolean isLoanAmountFromValidInterval(final BigDecimal loanAmount) {
-		return (loanAmount.compareTo(MicrolandingUtils.MAX_LOAN_AMOUT) == 1
-				|| loanAmount.compareTo(MicrolandingUtils.MIN_LOAN_AMOUT) == -1);
+		return (loanAmount.compareTo(MicrolandingConstants.MAX_LOAN_AMOUT) == 1
+				|| loanAmount.compareTo(MicrolandingConstants.MIN_LOAN_AMOUT) == -1);
 	}
 	
 	private static boolean isLoanTermFromValidInterval(final Integer loanTerm) {
-		return (loanTerm.compareTo(MicrolandingUtils.MAX_LOAN_TERM) == 1
-				|| loanTerm.compareTo(MicrolandingUtils.MIN_LOAN_TERM) == -1);
+		return (loanTerm.compareTo(MicrolandingConstants.MAX_LOAN_TERM) == 1
+				|| loanTerm.compareTo(MicrolandingConstants.MIN_LOAN_TERM) == -1);
 	}
 }

@@ -37,5 +37,13 @@ public class LoanRepository {
 		loans = hibernateTemplate.find(query);
 		return loans;
 	}
+	
+	public Loan getLoanbyId(Long id) throws DataAccessException {
+		return (Loan) hibernateTemplate.get(Loan.class.getName(), id);
+	}
+	
+	public void updateLoan(Loan loan) throws DataAccessException {
+		hibernateTemplate.update(loan);
+	}
 
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import lv.vitalijs.shakels.microlending.constants.MicrolandingConstants;
 import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.repositories.LoanRepository;
 import lv.vitalijs.shakels.microlending.services.RiskService;
-import lv.vitalijs.shakels.microlending.utils.MicrolandingUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,12 +46,12 @@ public class RiskServiceImpl implements RiskService {
 	}
 
 	private boolean isLoanWithMaximumAmount(final Loan loan) {
-		return loan.getAmount().equals(MicrolandingUtils.MAX_LOAN_AMOUT);
+		return loan.getAmount().equals(MicrolandingConstants.MAX_LOAN_AMOUT);
 	}
 
 	private boolean is3rdLoanFromSameIP(final Loan loan) {
 		List<Loan> result = new ArrayList<Loan>();
-		if (loan.getIpAddress().equals(MicrolandingUtils.UNKNOWN_IP_ADDRESS)) {
+		if (loan.getIpAddress().equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
 			return false;
 		}
 		try {
