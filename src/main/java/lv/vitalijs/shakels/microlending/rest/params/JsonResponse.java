@@ -11,7 +11,6 @@ import lv.vitalijs.shakels.microlending.entities.Loan;
 public class JsonResponse {
 
 	public static final String PAGE_MYLOANS = "myLoans.html";
-	public static final String PAGE_REJECT = "reject.html";
 
 	private String page;
 
