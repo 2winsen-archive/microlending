@@ -61,11 +61,10 @@ public class MicrolendingFacade {
 	@Path("/takeLoan")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public JsonResponse takeLoan(Loan paramLoan) {
+	public JsonResponse takeLoan(Loan loan) {
 		logger.debug("takeLoan - called successfully");
 		JsonResponse response = new JsonResponse();
-		if (LoanValidator.isValid(paramLoan)) {
-			Loan loan = new Loan(paramLoan);
+		if (LoanValidator.isValid(loan)) {
 			loan.setCreationDate(new Date());
 			if (!riskService.isHighRisk(loan)) {
 				try {

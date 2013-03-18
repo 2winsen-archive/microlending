@@ -13,11 +13,13 @@ import lv.vitalijs.shakels.microlending.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class LoanServiceImpl implements LoanService {
 
-	private static double INTEREST_MULTIPLICATION_FACTOR = 2; 
+	private static BigDecimal INTEREST_MULTIPLICATION_FACTOR = new BigDecimal("1.5"); 
 	
 	@Autowired
 	private LoanRepository loanRepository;
@@ -67,9 +69,8 @@ public class LoanServiceImpl implements LoanService {
 		return loan;
 	}
 	
-	private Loan updateInterest(Loan loan, double interestFactor) {
-		// In requirements it is mentioned to multiply interest by 0.5, but by multiplying the number becomes smaller so I am multiplication it by 2 
-		loan.setInterest(loan.getInterest().multiply(new BigDecimal(interestFactor)));
+	private Loan updateInterest(Loan loan, BigDecimal interestFactor) {
+		loan.setInterest(loan.getInterest().multiply(interestFactor));
 		loan.setReturnAmount(calculateReturnAmount(loan));
 		return loan;
 	}

@@ -12,7 +12,7 @@ function getServerConstants(completeHandler) {
 		url: rootURL + "/getServerConstants",
 		dataType: "json",
 		success: function(data) {
-			INTEREST = parseFloat(data.interest);
+			INTEREST = new BigDecimal(data.interest);
 			MAX_LOAN_AMOUNT = parseFloat(data.maxLoanAmount);
 			MIN_LOAN_AMOUNT = parseFloat(data.minLoanAmount);
 			MAX_LOAN_TERM = parseInt(data.maxLoanTerm);

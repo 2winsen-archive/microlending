@@ -17,7 +17,7 @@ public class Loan {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
 	private BigDecimal amount;
 
 	private Integer term;
@@ -42,31 +42,6 @@ public class Loan {
 
 	@Version
 	private Integer version;
-
-	public Loan() {
-	}
-
-	public Loan(Loan loan) {
-		this(loan.amount, loan.term, loan.ipAddress, loan.interest,
-				loan.returnAmount, loan.dueDate, loan.creationDate);
-	}
-
-	public Loan(BigDecimal amount, Integer term, String ipAddress,
-			BigDecimal interest, BigDecimal returnAmount, Date dueDate,
-			Date creationDate) {
-		super();
-		this.amount = amount;
-		this.term = term;
-		this.ipAddress = ipAddress;
-		this.interest = interest;
-		this.returnAmount = returnAmount;
-		if (this.dueDate != null) {
-			this.dueDate = (Date) dueDate.clone();
-		}
-		if (this.creationDate != null) {
-			this.creationDate = (Date) creationDate.clone();
-		}
-	}
 
 	public Long getId() {
 		return id;
@@ -168,6 +143,94 @@ public class Loan {
 
 	public void setCreationDateMillis(Long creationDateMillis) {
 		this.creationDateMillis = creationDateMillis;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result
+				+ ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime
+				* result
+				+ ((creationDateMillis == null) ? 0 : creationDateMillis
+						.hashCode());
+		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
+		result = prime * result
+				+ ((dueDateMillis == null) ? 0 : dueDateMillis.hashCode());
+		result = prime * result
+				+ ((extended == null) ? 0 : extended.hashCode());
+		result = prime * result
+				+ ((interest == null) ? 0 : interest.hashCode());
+		result = prime * result
+				+ ((ipAddress == null) ? 0 : ipAddress.hashCode());
+		result = prime * result
+				+ ((returnAmount == null) ? 0 : returnAmount.hashCode());
+		result = prime * result + ((term == null) ? 0 : term.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Loan other = (Loan) obj;
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
+			return false;
+		if (creationDate == null) {
+			if (other.creationDate != null)
+				return false;
+		} else if (!creationDate.equals(other.creationDate))
+			return false;
+		if (creationDateMillis == null) {
+			if (other.creationDateMillis != null)
+				return false;
+		} else if (!creationDateMillis.equals(other.creationDateMillis))
+			return false;
+		if (dueDate == null) {
+			if (other.dueDate != null)
+				return false;
+		} else if (!dueDate.equals(other.dueDate))
+			return false;
+		if (dueDateMillis == null) {
+			if (other.dueDateMillis != null)
+				return false;
+		} else if (!dueDateMillis.equals(other.dueDateMillis))
+			return false;
+		if (extended == null) {
+			if (other.extended != null)
+				return false;
+		} else if (!extended.equals(other.extended))
+			return false;
+		if (interest == null) {
+			if (other.interest != null)
+				return false;
+		} else if (!interest.equals(other.interest))
+			return false;
+		if (ipAddress == null) {
+			if (other.ipAddress != null)
+				return false;
+		} else if (!ipAddress.equals(other.ipAddress))
+			return false;
+		if (returnAmount == null) {
+			if (other.returnAmount != null)
+				return false;
+		} else if (!returnAmount.equals(other.returnAmount))
+			return false;
+		if (term == null) {
+			if (other.term != null)
+				return false;
+		} else if (!term.equals(other.term))
+			return false;
+		return true;
 	}
 
 }
