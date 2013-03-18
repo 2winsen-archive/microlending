@@ -15,4 +15,6 @@ public class MicrolandingConstants {
 	public static final Integer MIN_LOAN_TERM = 1;
 	
 	public static final String UNKNOWN_IP_ADDRESS = "1.1.1.1";
+	
+	public static final int NUM_DECIMALS = 2;
 }

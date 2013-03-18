@@ -1,6 +1,7 @@
 package lv.vitalijs.shakels.microlending.services.impl;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -10,12 +11,11 @@ import lv.vitalijs.shakels.microlending.repositories.LoanRepository;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.utils.DateUtils;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Service
 public class LoanServiceImpl implements LoanService {
 
@@ -24,16 +24,18 @@ public class LoanServiceImpl implements LoanService {
 	@Autowired
 	private LoanRepository loanRepository;
 
+	@Transactional
 	@Override
-	public void processLoan(Loan loan) throws DataAccessException {
+	public void processLoan(Loan loan) throws HibernateException {
 		loan.setInterest(calculateInterest(loan));
 		loan.setReturnAmount(calculateReturnAmount(loan));
 		loan.setDueDate(calculateDueDate(loan));
 		loanRepository.saveLoan(loan);
 	}
 
+	@Transactional
 	@Override
-	public List<Loan> getAllLoans() throws DataAccessException {
+	public List<Loan> getAllLoans() throws HibernateException {
 		List<Loan> loans = loanRepository.getAllLoans();
 		for (Loan loan : loans) {
 			includeDatesInMillis(loan);
@@ -41,18 +43,21 @@ public class LoanServiceImpl implements LoanService {
 		return loans;
 	}
 
+	@Transactional
 	@Override
-	public Loan extendLoan(Long id) throws DataAccessException {
+	public Loan extendLoan(Long id) throws HibernateException {
 		Loan loan = loanRepository.getLoanbyId(id);
 		loan.setDueDate(DateUtils.shiftDateByDays(loan.getDueDate(), DateUtils.DAYS_IN_A_WEEK));
+		loan.setTerm(loan.getTerm() + DateUtils.DAYS_IN_A_WEEK);
 		updateInterest(loan, INTEREST_MULTIPLICATION_FACTOR);
 		loan.setExtended(true);
-		loanRepository.updateLoan(loan);
+		loanRepository.saveLoan(loan);
 		return loan;
 	}
 
 	private BigDecimal calculateReturnAmount(final Loan loan) {
-		return loan.getAmount().multiply(loan.getInterest()).add(loan.getAmount());
+		BigDecimal result = loan.getAmount().multiply(loan.getInterest()).add(loan.getAmount());
+		return result.setScale(MicrolandingConstants.NUM_DECIMALS, RoundingMode.HALF_UP);
 	}
 
 	private Date calculateDueDate(final Loan loan) {

@@ -20,12 +20,12 @@ import lv.vitalijs.shakels.microlending.services.RiskService;
 import lv.vitalijs.shakels.microlending.spring.config.ApplicationContextConfig;
 import lv.vitalijs.shakels.microlending.validators.LoanValidator;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -70,7 +70,7 @@ public class MicrolendingFacade {
 				try {
 					loanService.processLoan(loan);
 					response.setPage(JsonResponse.PAGE_MYLOANS);
-				} catch (DataAccessException e) {
+				} catch (HibernateException e) {
 					logger.error(e.getMessage());
 					response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
 				}
@@ -89,7 +89,7 @@ public class MicrolendingFacade {
 		JsonResponse response = new JsonResponse();
 		try {
 			response.setResults(loanService.getAllLoans());
-		} catch (DataAccessException e) {
+		} catch (HibernateException e) {
 			logger.error(e.getMessage());
 			response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
 		}
@@ -105,7 +105,7 @@ public class MicrolendingFacade {
 		JsonResponse response = new JsonResponse();
 		try {
 			response.addToResults(loanService.extendLoan(Long.parseLong(id)));
-		} catch (DataAccessException e) {
+		} catch (HibernateException e) {
 			logger.error(e.getMessage());
 			response.setError(context.getMessage("error.server.error", null, Locale.getDefault()));
 		}

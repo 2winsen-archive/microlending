@@ -3,14 +3,21 @@ package lv.vitalijs.shakels.microlending.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="loan.getLoansByIp", query="select loan from Loan loan where loan.ipAddress = :ipAddress"),
+	@NamedQuery(name="loan.getAllLoans", query="select loan from Loan loan")
+})
 @XmlRootElement
 public class Loan {
 
@@ -24,6 +31,7 @@ public class Loan {
 
 	private String ipAddress;
 
+	@Column(precision=8, scale=6)
 	private BigDecimal interest;
 
 	private BigDecimal returnAmount;

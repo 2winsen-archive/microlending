@@ -9,14 +9,13 @@ import lv.vitalijs.shakels.microlending.entities.Loan;
 import lv.vitalijs.shakels.microlending.repositories.LoanRepository;
 import lv.vitalijs.shakels.microlending.services.RiskService;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Service
 public class RiskServiceImpl implements RiskService {
 
@@ -51,6 +50,7 @@ public class RiskServiceImpl implements RiskService {
 		return loan.getAmount().equals(MicrolandingConstants.MAX_LOAN_AMOUT);
 	}
 
+	@Transactional
 	private boolean is3rdLoanFromSameIP(final Loan loan) {
 		List<Loan> result = new ArrayList<Loan>();
 		if (loan.getIpAddress().equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
@@ -58,7 +58,7 @@ public class RiskServiceImpl implements RiskService {
 		}
 		try {
 			result = loanRepository.getLoansByIP(loan.getIpAddress());
-		} catch (DataAccessException e) {
+		} catch (HibernateException e) {
 			logger.error(e.getMessage());
 		}
 		return result.size() > RISK_MAX_SAME_IP;

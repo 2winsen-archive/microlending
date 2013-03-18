@@ -20,16 +20,16 @@ function getAllLoansSuccessHandler(data) {
 					return formatDate(new Date(parseInt(this.data.creationDateMillis)));
 				},
 				"formatDueDate" : function() {
-					return formatDate(new Date(parseInt(this.data.dueDateMillis)));
+					return formatDueDate(this.data.dueDateMillis);
 				},
 				"formatLoanAmount" : function() {
-					return CURRENCY + " " + parseInt(this.data.amount);
+					return formatLoanAmount(this.data.amount);
 				},
 				"formatLoanInterest" : function() {
-					return (this.data.interest * 100).toFixed() + "%";
+					return formatLoanInterest(this.data.interest);
 				},
 				"formatReturnAmount" : function() {
-					return CURRENCY + " " + this.data.returnAmount;
+					return formatReturnAmount(this.data.returnAmount);
 				}
 			});
 		}
@@ -51,8 +51,18 @@ function getAllLoansErrorHandler(data) {
 function extendLoanSuccessHandler(data) {
 	console.log("extendLoanSuccessHandler");
 	if (data.results != null) {
-		var rowSelector = "#rowId" + data.results.id;
-		$(rowSelector).css("color", "red"); 
+		var rowSelector = "#row" + data.results.id;
+		var termSelector = "#term" + data.results.id;
+		var interestSelector = "#interest" + data.results.id;
+		var dueDateSelector = "#dueDate" + data.results.id;
+		var returnAmountSelector = "#returnAmount" + data.results.id;
+		var extendedSelector = "#extended" + data.results.id;
+		$(termSelector).text(data.results.term);
+		$(interestSelector).text(formatLoanInterest(data.results.interest));
+		$(dueDateSelector).text(formatDueDate(data.results.dueDateMillis));
+		$(returnAmountSelector).text(formatReturnAmount(data.results.returnAmount));
+		$(extendedSelector).text("EXTENDED");
+		$(rowSelector).addClass("info");
 	}
 }
 
@@ -65,6 +75,21 @@ function showErrorMessage() {
 	$("#myLoansAlert").show();
 }
 
+function formatDueDate(dueDateMillis) {
+	return formatDate(new Date(parseInt(dueDateMillis)));
+}
+
+function formatLoanAmount(amount) {
+	return CURRENCY + " " + parseInt(amount);
+}
+
+function formatLoanInterest(interest) {
+	return (interest * 100) + "%";
+}
+
+function formatReturnAmount(returnAmount) {
+	return CURRENCY + " " + returnAmount;
+}
 
 // EVENTS
 // =======================================

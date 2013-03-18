@@ -49,15 +49,15 @@
 							<th>Extended?</th>
 						</tr>
 						{{#items}}
-							<tr id="rowId{{data.id}}">
+							<tr id="row{{data.id}}" {{#data.extended}}class="info"{{/data.extended}}>
 								<td>{{index}}</td>
 								<td>{{formatCreationDate}}</td>
 								<td>{{formatLoanAmount}}</td>
-								<td>{{data.term}}</td>
-								<td>{{formatLoanInterest}}</td>
-								<td>{{formatDueDate}}</td>
-								<td>{{formatReturnAmount}}</td>
-								<td>{{#data.extended}}EXTENED{{/data.extended}}</td>
+								<td id="term{{data.id}}">{{data.term}}</td>
+								<td id="interest{{data.id}}">{{formatLoanInterest}}</td>
+								<td id="dueDate{{data.id}}">{{formatDueDate}}</td>
+								<td id="returnAmount{{data.id}}">{{formatReturnAmount}}</td>
+								<td id="extended{{data.id}}">{{#data.extended}}EXTENED{{/data.extended}}</td>
 								<td style="padding-left: 40px;"><button class="btn btn-primary" type="button" onClick="extendLoanEvent({{data.id}})">Extend</button></td>
 							<tr>
 						{{/items}}

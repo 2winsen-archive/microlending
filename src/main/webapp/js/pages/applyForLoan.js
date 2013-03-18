@@ -111,8 +111,7 @@ function getReturnAmount(amount, term) {
 	var termDecimal = new BigDecimal(term.toString());
 	var interest = INTEREST.multiply(termDecimal);
 	var result = amountDecimal.multiply(interest).add(amountDecimal);
-	return CURRENCY + " "
-			+ (Math.round(result * 100) / 100).toFixed(NUM_DECIMALS);
+	return CURRENCY + " " + result.setScale(NUM_DECIMALS, BigDecimal.prototype.ROUND_HALF_UP);
 }
 
 

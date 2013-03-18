@@ -11,13 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@PropertySource({"persistence.properties"})
+@PropertySource({ "persistence.properties" })
 @EnableTransactionManagement
 public class PersistenceConfig {
 
@@ -54,14 +53,6 @@ public class PersistenceConfig {
 		HibernateTransactionManager htm = new HibernateTransactionManager();
 		htm.setSessionFactory(sessionFactory);
 		return htm;
-	}
-
-	@Bean
-	@Autowired
-	public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(
-				sessionFactory);
-		return hibernateTemplate;
 	}
 
 	@Bean
