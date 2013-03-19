@@ -104,7 +104,7 @@ public class LoanRepositoryImplTest {
 	public void getLoanbyId() {
 		List<Loan> loans = repository.getAllLoans();
 		Assert.assertEquals("Created and persisted Laons should be equal",
-				testLoans.get(0), repository.getLoanbyId(1L));
+				testLoans.get(0), repository.getLoanbyId(3L));
 	}
 
 }
