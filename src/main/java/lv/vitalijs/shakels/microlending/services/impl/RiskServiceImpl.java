@@ -53,7 +53,8 @@ public class RiskServiceImpl implements RiskService {
 	@Transactional
 	private boolean is3rdLoanFromSameIP(final Loan loan) {
 		List<Loan> result = new ArrayList<Loan>();
-		if (loan.getIpAddress().equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
+		if (loan.getIpAddress()
+				.equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
 			return false;
 		}
 		try {

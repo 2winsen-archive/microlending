@@ -17,25 +17,25 @@ import lv.vitalijs.shakels.microlending.rest.params.JsonResponse;
 import lv.vitalijs.shakels.microlending.rest.params.JsonServerData;
 import lv.vitalijs.shakels.microlending.services.LoanService;
 import lv.vitalijs.shakels.microlending.services.RiskService;
-import lv.vitalijs.shakels.microlending.spring.config.ApplicationContextConfig;
 import lv.vitalijs.shakels.microlending.validators.LoanValidator;
 
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
 @Path("/")
-public class MicrolendingFacade {
+public class MicrolendingFacade implements ApplicationContextAware {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(MicrolendingFacade.class);
 	
-	private static final ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationContextConfig.class); 
+	private ApplicationContext context; 
 
 	@Autowired
 	private RiskService riskService;
@@ -111,5 +111,11 @@ public class MicrolendingFacade {
 		}
         return response;
     }
+
+	@Override
+	public void setApplicationContext(ApplicationContext paramApplicationContext)
+			throws BeansException {
+		this.context = paramApplicationContext;		
+	}
 	
 }
