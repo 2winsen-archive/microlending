@@ -1,6 +1,6 @@
 var HOST = "http://localhost";
-//var PORT = "9080"; 
-var PORT = "8080"; 
+var PORT = "9080"; 
+//var PORT = "8080"; 
 var BASE_PATH = "microlending/rest";
 
 var rootURL = HOST + ":" + PORT + "/" + BASE_PATH;

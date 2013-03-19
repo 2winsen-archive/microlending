@@ -1,27 +1,31 @@
 Starting application:
-	1. To start Microlending application server just execute run.cmd file. It will install all dependencies and compile all necessary java files and afterwards will deploy application using jetty server.
+	1. To start Microlending application server just execute run.cmd file. It will install all dependencies and compile 
+		all necessary java files and afterwards will deploy application using jetty server.
 	2. After open your browser with URL http://localhost:9080/microlending/
+	3. To run acceptance tests go to URL http://localhost:9080/microlending/selenium/seleniumRunner.html and click link 
+		"Run all tests", to open Selenium core application for running Selenium tests. Afterwards run test suite for Happy path scenario acceptance tests 
 
 Requirements:
 	Goal
 	Create a simple micro-lending app similar to one of our existing products.
 
 	Business requirements
-	· User can apply for loan by selecting amount and term followed by clicking „Apply for Loan” button.
-	· Loan application risk analysis is performed. Risk is considered too high if:
+	- User can apply for loan by selecting amount and term followed by clicking Apply for Loanï¿½ button.
+	- Loan application risk analysis is performed. Risk is considered too high if:
 		o    the attempt to take loan is made after 00:00 with max possible amount.
 		o    reached max applications (e.g. 3) per day from a single IP.
-	· Loan is issued if there are no risks associated with the application. If so, client is navigated to „My Loans” page. However, if risk is surrounding the application, client sees "rejection" message.
-	· On "My Loans" page a client should be able to extend a loan by clicking "Extend" button. Loan term gets extended for one week, interest gets multiplied by 0.5.
-	· The whole history of loans is visible for clients, including loan extensions.
+	- Loan is issued if there are no risks associated with the application. If so, client is navigated to My Loans page. However, 
+		if risk is surrounding the application, client sees "rejection" message.
+	- On "My Loans" page a client should be able to extend a loan by clicking "Extend" button. Loan term gets extended for one week, interest gets multiplied by 0.5.
+	- The whole history of loans is visible for clients, including loan extensions.
 
 	Technical requirements
 
-	· Backend in Java 6+, XML-less Spring, Hibernate.
-	· Ajax-style web, no server-side templating, only JavaScript (any framework).
-	· Code is production-ready, covered with unit tests.
-	· Acceptance tests for the happy path scenario included.
-	· Ability to run application from the command line.
+	- Backend in Java 6+, XML-less Spring, Hibernate.
+	- Ajax-style web, no server-side templating, only JavaScript (any framework).
+	- Code is production-ready, covered with unit tests.
+	- Acceptance tests for the happy path scenario included.
+	- Ability to run application from the command line.
 
 	What gets evaluated
 	- Requirements
