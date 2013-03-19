@@ -19,10 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoanServiceImpl implements LoanService {
 
-	private static BigDecimal INTEREST_MULTIPLICATION_FACTOR = new BigDecimal("1.5"); 
-	
-	@Autowired
+	private static BigDecimal INTEREST_MULTIPLICATION_FACTOR = new BigDecimal("1.5");
+
 	private LoanRepository loanRepository;
+
+	@Autowired
+	public void setLoanRepository(LoanRepository loanRepository) {
+		this.loanRepository = loanRepository;
+	}
 
 	@Transactional
 	@Override
@@ -52,6 +56,7 @@ public class LoanServiceImpl implements LoanService {
 		updateInterest(loan, INTEREST_MULTIPLICATION_FACTOR);
 		loan.setExtended(true);
 		loanRepository.saveLoan(loan);
+		includeDatesInMillis(loan);
 		return loan;
 	}
 
@@ -73,7 +78,7 @@ public class LoanServiceImpl implements LoanService {
 		loan.setCreationDateMillis(loan.getCreationDate().getTime());
 		return loan;
 	}
-	
+
 	private Loan updateInterest(Loan loan, BigDecimal interestFactor) {
 		loan.setInterest(loan.getInterest().multiply(interestFactor));
 		loan.setReturnAmount(calculateReturnAmount(loan));

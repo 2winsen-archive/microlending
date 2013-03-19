@@ -27,16 +27,18 @@ public class RiskServiceImpl implements RiskService {
 	 */
 	private static final int RISK_MAX_SAME_IP = 2;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(RiskServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(RiskServiceImpl.class);
+
+	private LoanRepository loanRepository;
 
 	@Autowired
-	private LoanRepository loanRepository;
+	public void setLoanRepository(LoanRepository loanRepository) {
+		this.loanRepository = loanRepository;
+	}
 
 	@Override
 	public boolean isHighRisk(final Loan loan) {
-		return (isLoanMadeFromMidnightTillSeven(loan) && isLoanWithMaximumAmount(loan))
-				|| is3rdLoanFromSameIP(loan);
+		return (isLoanMadeFromMidnightTillSeven(loan) && isLoanWithMaximumAmount(loan)) || is3rdLoanFromSameIP(loan);
 	}
 
 	private boolean isLoanMadeFromMidnightTillSeven(final Loan loan) {
@@ -53,8 +55,7 @@ public class RiskServiceImpl implements RiskService {
 	@Transactional
 	private boolean is3rdLoanFromSameIP(final Loan loan) {
 		List<Loan> result = new ArrayList<Loan>();
-		if (loan.getIpAddress()
-				.equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
+		if (loan.getIpAddress().equals(MicrolandingConstants.UNKNOWN_IP_ADDRESS)) {
 			return false;
 		}
 		try {

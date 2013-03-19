@@ -73,9 +73,6 @@ public class Loan {
 
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
-		if (dueDate != null) {
-			dueDateMillis = dueDate.getTime();
-		}
 	}
 
 	public Date getCreationDate() {
@@ -84,9 +81,6 @@ public class Loan {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-		if (creationDate != null) {
-			creationDateMillis = creationDate.getTime();
-		}		
 	}
 
 	public Integer getVersion() {
