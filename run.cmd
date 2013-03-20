@@ -1,1 +1,1 @@
-mvn clean install jetty:run
+mvn -DdownloadSources=false -DdownloadJavadocs=false clean install jetty:run
