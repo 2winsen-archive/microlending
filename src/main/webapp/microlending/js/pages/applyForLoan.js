@@ -25,9 +25,6 @@ function prepareApplyForLoan() {
 			// Return amount
 			detailsReturnAmount.text(getReturnAmount(ui.value, termSlider
 					.slider("value")));
-		},
-		stop: function(event, ui) {
-			console.log("gu");
 		}
 	});
 	amount.val(CURRENCY + " " + amountSlider.slider("value"));
