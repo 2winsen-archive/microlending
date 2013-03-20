@@ -21,28 +21,53 @@
 			</tr>
 			<tr>
 				<td>verifyTextPresent</td>
+				<td>Microlending</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>verifyTextPresent</td>
+				<td>Apply for Loan</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>verifyTextPresent</td>
+				<td>My Loans</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>verifyTextPresent</td>
 				<td>Loan Details</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>verifyTextPresent</td>
-				<td>Ls 5</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>verifyTextPresent</td>
-				<td>Days 1</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>verifyTextPresent</td>
-				<td>21.3.2013</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>verifyTextPresent</td>
+				<td>waitForElementPresent</td>
+				<td>id=detailsReturnAmount</td>
 				<td>Ls 5.05</td>
-				<td></td>
+			</tr>
+			<tr>
+				<td>dragAndDrop</td>
+				<td>//div[@id='amountSlider']/a</td>
+				<td>+100,0</td>
+			</tr>
+			<tr>
+				<td>dragAndDrop</td>
+				<td>//div[@id='termSlider']/a</td>
+				<td>+100,0</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>id=detailsTerm</td>
+				<td>Days 6</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>id=detailsAmount</td>
+				<td>Ls 40</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>id=detailsReturnAmount</td>
+				<td>Ls 42.40</td>
 			</tr>
 			<tr>
 				<td>clickAndWait</td>
@@ -51,22 +76,57 @@
 			</tr>
 			<tr>
 				<td>verifyTextPresent</td>
-				<td>Ls 5.05</td>
+				<td>Microlending</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>verifyTextPresent</td>
-				<td>1%</td>
+				<td>Apply for Loan</td>
 				<td></td>
+			</tr>
+			<tr>
+				<td>verifyTextPresent</td>
+				<td>My Loans</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>waitForElementPresent</td>
+				<td>id=applyForLoanButton</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>assertElementPresent</td>
+				<td>id=applyForLoanButton</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[3]</td>
+				<td>Ls 40</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[4]</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[5]</td>
+				<td>6%</td>
+			</tr>
+			<tr>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[7]</td>
+				<td>Ls 42.40</td>
 			</tr>
 			<tr>
 				<td>click</td>
-				<td>xpath=(//button[@type='button'])[1]</td>
+				<td>css=button.btn.btn-primary</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>waitForPageToLoad</td>
-				<td></td>
+				<td>waitForTextPresent</td>
+				<td>EXTENDED</td>
 				<td></td>
 			</tr>
 			<tr>
@@ -75,24 +135,14 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>clickAndWait</td>
-				<td>id=applyForLoanButton</td>
-				<td></td>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[5]</td>
+				<td>9%</td>
 			</tr>
 			<tr>
-				<td>verifyTextPresent</td>
-				<td>Loan Details</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>assertValue</td>
-				<td>id=amount</td>
-				<td>Ls 5</td>
-			</tr>
-			<tr>
-				<td>assertValue</td>
-				<td>id=term</td>
-				<td>Days 1</td>
+				<td>assertText</td>
+				<td>//tr[@id='row1']/td[7]</td>
+				<td>Ls 43.60</td>
 			</tr>
 			<tr>
 				<td>clickAndWait</td>
