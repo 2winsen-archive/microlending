@@ -42,14 +42,12 @@ public class Loan {
 
 	private BigDecimal returnAmount;
 
-	@Column
 	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
 	private DateTime dueDate;
 
 	@Transient
 	private Long dueDateMillis;
 
-	@Column
 	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
 	private DateTime creationDate;
 
