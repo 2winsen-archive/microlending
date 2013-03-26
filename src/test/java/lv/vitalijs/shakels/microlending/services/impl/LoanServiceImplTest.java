@@ -31,8 +31,8 @@ public class LoanServiceImplTest {
 		Loan testLoan1 = new Loan();
 		testLoan1.setAmount(new BigDecimal("1.1"));
 		testLoan1.setTerm(10);
-		testLoan1.setCreationDate(creationDateCal.getTime());
-		testLoan1.setDueDate(dueDateCal.getTime());
+//		testLoan1.setCreationDate(creationDateCal.getTime());
+//		testLoan1.setDueDate(dueDateCal.getTime());
 		testLoan1.setExtended(false);
 		testLoan1.setInterest(new BigDecimal("1.1"));
 		testLoan1.setIpAddress("1.1.1.1");
@@ -41,8 +41,8 @@ public class LoanServiceImplTest {
 		Loan testLoan2 = new Loan();
 		testLoan2.setAmount(new BigDecimal("2.1"));
 		testLoan2.setTerm(10);
-		testLoan2.setCreationDate(creationDateCal.getTime());
-		testLoan2.setDueDate(dueDateCal.getTime());
+//		testLoan2.setCreationDate(creationDateCal.getTime());
+//		testLoan2.setDueDate(dueDateCal.getTime());
 		testLoan2.setExtended(false);
 		testLoan2.setInterest(new BigDecimal("2.1"));
 		testLoan2.setIpAddress("2.2.2.2");
@@ -72,7 +72,7 @@ public class LoanServiceImplTest {
 		Assert.assertEquals("Interest", testLoans.get(0).getInterest(), new BigDecimal("0.10"));
 		Assert.assertEquals("Return Amount", testLoans.get(0).getReturnAmount(), new BigDecimal("1.21"));
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(testLoans.get(0).getDueDate());
+//		cal.setTime(testLoans.get(0).getDueDate());
 		Assert.assertEquals("Due Date DATE", cal.get(Calendar.DATE), 29);
 		Assert.assertEquals("Due Date MONTH", cal.get(Calendar.MONTH), 3);
 		Assert.assertEquals("Due Date YEAR", cal.get(Calendar.YEAR), 2013);
@@ -93,7 +93,7 @@ public class LoanServiceImplTest {
 		Assert.assertEquals("Return Amount", loan.getReturnAmount(), new BigDecimal("1.27"));
 		Assert.assertEquals("Term", loan.getTerm(), new Integer(17));
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(loan.getDueDate());
+//		cal.setTime(loan.getDueDate());
 		Assert.assertEquals("Due Date DATE", cal.get(Calendar.DATE), 6);
 		Assert.assertEquals("Due Date MONTH", cal.get(Calendar.MONTH), 4);
 		Assert.assertEquals("Due Date YEAR", cal.get(Calendar.YEAR), 2013);

@@ -34,8 +34,8 @@ public class RiskServiceImplTest {
 		Loan testLoan1 = new Loan();
 		testLoan1.setAmount(new BigDecimal("200"));
 		testLoan1.setTerm(10);
-		testLoan1.setCreationDate(highCreationDateCal.getTime());
-		testLoan1.setDueDate(dueDateCal.getTime());
+//		testLoan1.setCreationDate(highCreationDateCal.getTime());
+//		testLoan1.setDueDate(dueDateCal.getTime());
 		testLoan1.setExtended(false);
 		testLoan1.setInterest(new BigDecimal("1.1"));
 		testLoan1.setIpAddress("1.1.1.1");
@@ -44,8 +44,8 @@ public class RiskServiceImplTest {
 		Loan testLoan2 = new Loan();
 		testLoan2.setAmount(new BigDecimal("2.1"));
 		testLoan2.setTerm(10);
-		testLoan2.setCreationDate(lowCreationDateCal.getTime());
-		testLoan2.setDueDate(dueDateCal.getTime());
+//		testLoan2.setCreationDate(lowCreationDateCal.getTime());
+//		testLoan2.setDueDate(dueDateCal.getTime());
 		testLoan2.setExtended(false);
 		testLoan2.setInterest(new BigDecimal("2.1"));
 		testLoan2.setIpAddress("2.2.2.2");
@@ -54,8 +54,8 @@ public class RiskServiceImplTest {
 		Loan testLoan3 = new Loan();
 		testLoan3.setAmount(new BigDecimal("2.1"));
 		testLoan3.setTerm(10);
-		testLoan3.setCreationDate(lowCreationDateCal.getTime());
-		testLoan3.setDueDate(dueDateCal.getTime());
+//		testLoan3.setCreationDate(lowCreationDateCal.getTime());
+//		testLoan3.setDueDate(dueDateCal.getTime());
 		testLoan3.setExtended(false);
 		testLoan3.setInterest(new BigDecimal("2.1"));
 		testLoan3.setIpAddress("3.3.3.3");
@@ -64,8 +64,8 @@ public class RiskServiceImplTest {
 		Loan testLoan4 = new Loan();
 		testLoan4.setAmount(new BigDecimal("2.1"));
 		testLoan4.setTerm(10);
-		testLoan4.setCreationDate(lowCreationDateCal.getTime());
-		testLoan4.setDueDate(dueDateCal.getTime());
+//		testLoan4.setCreationDate(lowCreationDateCal.getTime());
+//		testLoan4.setDueDate(dueDateCal.getTime());
 		testLoan4.setExtended(false);
 		testLoan4.setInterest(new BigDecimal("2.1"));
 		testLoan4.setIpAddress("3.3.3.3");
@@ -74,8 +74,8 @@ public class RiskServiceImplTest {
 		Loan testLoan5 = new Loan();
 		testLoan5.setAmount(new BigDecimal("2.1"));
 		testLoan5.setTerm(10);
-		testLoan5.setCreationDate(lowCreationDateCal.getTime());
-		testLoan5.setDueDate(dueDateCal.getTime());
+//		testLoan5.setCreationDate(lowCreationDateCal.getTime());
+//		testLoan5.setDueDate(dueDateCal.getTime());
 		testLoan5.setExtended(false);
 		testLoan5.setInterest(new BigDecimal("2.1"));
 		testLoan5.setIpAddress("3.3.3.3");

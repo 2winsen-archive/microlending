@@ -51,8 +51,8 @@ public class LoanRepositoryImplTest {
 		Loan testLoan1 = new Loan();
 		testLoan1.setAmount(new BigDecimal("1.1"));
 		testLoan1.setTerm(10);
-		testLoan1.setCreationDate(creationDateCal.getTime());
-		testLoan1.setDueDate(dueDateCal.getTime());
+//		testLoan1.setCreationDate(creationDateCal.getTime());
+//		testLoan1.setDueDate(dueDateCal.getTime());
 		testLoan1.setExtended(false);
 		testLoan1.setInterest(new BigDecimal("1.1"));
 		testLoan1.setIpAddress("1.1.1.1");
@@ -61,8 +61,8 @@ public class LoanRepositoryImplTest {
 		Loan testLoan2 = new Loan();
 		testLoan2.setAmount(new BigDecimal("2.1"));
 		testLoan2.setTerm(10);
-		testLoan2.setCreationDate(creationDateCal.getTime());
-		testLoan2.setDueDate(dueDateCal.getTime());
+//		testLoan2.setCreationDate(creationDateCal.getTime());
+//		testLoan2.setDueDate(dueDateCal.getTime());
 		testLoan2.setExtended(false);
 		testLoan2.setInterest(new BigDecimal("2.1"));
 		testLoan2.setIpAddress("2.2.2.2");

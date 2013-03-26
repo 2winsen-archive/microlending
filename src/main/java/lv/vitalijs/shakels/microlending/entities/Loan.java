@@ -1,7 +1,7 @@
 package lv.vitalijs.shakels.microlending.entities;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,39 +13,49 @@ import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import com.google.common.base.Objects;
+
 @Entity
 @NamedQueries({
-	@NamedQuery(name="loan.getLoansByIp", query="select loan from Loan loan where loan.ipAddress = :ipAddress"),
-	@NamedQuery(name="loan.getAllLoans", query="select loan from Loan loan")
-})
+		@NamedQuery(name = "loan.getLoansByIp", query = "select loan from Loan loan where loan.ipAddress = :ipAddress"),
+		@NamedQuery(name = "loan.getAllLoans", query = "select loan from Loan loan") })
 @XmlRootElement
 public class Loan {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
+	private String businessKey = UUID.randomUUID().toString();
+
 	private BigDecimal amount;
 
 	private Integer term;
 
 	private String ipAddress;
 
-	@Column(precision=8, scale=6)
+	@Column(precision = 8, scale = 6)
 	private BigDecimal interest;
 
 	private BigDecimal returnAmount;
 
-	private Date dueDate;
-	
+	@Column
+	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+	private DateTime dueDate;
+
 	@Transient
 	private Long dueDateMillis;
 
-	private Date creationDate;
-	
+	@Column
+	@Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+	private DateTime creationDate;
+
 	@Transient
 	private Long creationDateMillis;
-	
+
 	private Boolean extended;
 
 	@Version
@@ -67,19 +77,19 @@ public class Loan {
 		this.interest = interest;
 	}
 
-	public Date getDueDate() {
+	public DateTime getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(DateTime dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	public Date getCreationDate() {
+	public DateTime getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(DateTime creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -149,90 +159,17 @@ public class Loan {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result
-				+ ((creationDate == null) ? 0 : creationDate.hashCode());
-		result = prime
-				* result
-				+ ((creationDateMillis == null) ? 0 : creationDateMillis
-						.hashCode());
-		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		result = prime * result
-				+ ((dueDateMillis == null) ? 0 : dueDateMillis.hashCode());
-		result = prime * result
-				+ ((extended == null) ? 0 : extended.hashCode());
-		result = prime * result
-				+ ((interest == null) ? 0 : interest.hashCode());
-		result = prime * result
-				+ ((ipAddress == null) ? 0 : ipAddress.hashCode());
-		result = prime * result
-				+ ((returnAmount == null) ? 0 : returnAmount.hashCode());
-		result = prime * result + ((term == null) ? 0 : term.hashCode());
-		return result;
+		return Objects.hashCode(businessKey);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
+		if (obj instanceof Loan) {
+			final Loan loan = (Loan) obj;
+			return Objects.equal(businessKey, loan.businessKey);
+		} else {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Loan other = (Loan) obj;
-		if (amount == null) {
-			if (other.amount != null)
-				return false;
-		} else if (!amount.equals(other.amount))
-			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
-				return false;
-		} else if (!creationDate.equals(other.creationDate))
-			return false;
-		if (creationDateMillis == null) {
-			if (other.creationDateMillis != null)
-				return false;
-		} else if (!creationDateMillis.equals(other.creationDateMillis))
-			return false;
-		if (dueDate == null) {
-			if (other.dueDate != null)
-				return false;
-		} else if (!dueDate.equals(other.dueDate))
-			return false;
-		if (dueDateMillis == null) {
-			if (other.dueDateMillis != null)
-				return false;
-		} else if (!dueDateMillis.equals(other.dueDateMillis))
-			return false;
-		if (extended == null) {
-			if (other.extended != null)
-				return false;
-		} else if (!extended.equals(other.extended))
-			return false;
-		if (interest == null) {
-			if (other.interest != null)
-				return false;
-		} else if (!interest.equals(other.interest))
-			return false;
-		if (ipAddress == null) {
-			if (other.ipAddress != null)
-				return false;
-		} else if (!ipAddress.equals(other.ipAddress))
-			return false;
-		if (returnAmount == null) {
-			if (other.returnAmount != null)
-				return false;
-		} else if (!returnAmount.equals(other.returnAmount))
-			return false;
-		if (term == null) {
-			if (other.term != null)
-				return false;
-		} else if (!term.equals(other.term))
-			return false;
-		return true;
+		}
 	}
 
 }

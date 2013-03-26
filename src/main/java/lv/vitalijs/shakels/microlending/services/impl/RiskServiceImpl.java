@@ -1,7 +1,6 @@
 package lv.vitalijs.shakels.microlending.services.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import lv.vitalijs.shakels.microlending.constants.MicrolandingConstants;
@@ -42,10 +41,8 @@ public class RiskServiceImpl implements RiskService {
 	}
 
 	private boolean isLoanMadeFromMidnightTillSeven(final Loan loan) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(loan.getCreationDate());
-		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		return hours >= RISK_TIME_MIN_LIMIT && hours <= RISK_TIME_MAX_LIMIT;
+		int hour = loan.getCreationDate().getHourOfDay();
+		return hour >= RISK_TIME_MIN_LIMIT && hour <= RISK_TIME_MAX_LIMIT;
 	}
 
 	private boolean isLoanWithMaximumAmount(final Loan loan) {

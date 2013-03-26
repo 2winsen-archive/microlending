@@ -1,7 +1,12 @@
 var HOST = "http://localhost";
-var PORT = "9080"; 
-//var PORT = "8080"; 
-var BASE_PATH = "microlending/rest";
+
+// JETTY
+//var PORT = "9080";
+
+// TOMCAT
+var PORT = "8080";
+
+var BASE_PATH = "microlending/rest/";
 
 var rootURL = HOST + ":" + PORT + "/" + BASE_PATH;
 
@@ -9,7 +14,7 @@ function getServerConstants(completeHandler) {
 	console.log("getServerConstants");
 	$.ajax({
 		type: 'GET',
-		url: rootURL + "/getServerConstants",
+		url: rootURL + "getServerConstants",
 		dataType: "json",
 		success: function(data) {
 			INTEREST = new BigDecimal(data.interest);
@@ -26,7 +31,7 @@ function takeLoan(loan, successHandler, errorHandler) {
 	console.log("takeLoan");
 	$.ajax({
 		type: 'POST',
-		url: rootURL + "/takeLoan",
+		url: rootURL,
 		dataType: "json",
 		contentType: "application/json",
 		data: loan,
@@ -39,7 +44,7 @@ function getAllLoans(successHandler, errorHandler) {
 	console.log("getAllLoans");
 	$.ajax({
 		type: 'GET',
-		url: rootURL + "/getAllLoans",
+		url: rootURL,
 		dataType: "json",
 		success: successHandler,
 		error: errorHandler
@@ -49,8 +54,8 @@ function getAllLoans(successHandler, errorHandler) {
 function extendLoan(id, successHandler, errorHandler) {
 	console.log("extendLoan");
 	$.ajax({
-		type: 'POST',
-		url: rootURL + "/extendLoan/" + id,
+		type: 'PUT',
+		url: rootURL + id,
 		dataType: "json",
 		contentType: "application/json",
 		success: successHandler,
