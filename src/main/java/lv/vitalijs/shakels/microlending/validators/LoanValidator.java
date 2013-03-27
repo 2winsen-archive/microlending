@@ -9,12 +9,11 @@ import lv.vitalijs.shakels.microlending.entities.Loan;
 public class LoanValidator {
 
 	private static final String IP_ADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
-			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 			+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
 
 	public static boolean isValid(final Loan loan) {
-		if (loan.getAmount() != null && isLoanAmountFromValidInterval(loan.getAmount()) ) {
+		if (loan.getAmount() != null && isLoanAmountFromValidInterval(loan.getAmount())) {
 			return false;
 		}
 		if (loan.getTerm() != null && isLoanTermFromValidInterval(loan.getTerm())) {
@@ -26,14 +25,14 @@ public class LoanValidator {
 		}
 		return true;
 	}
-	
+
 	private static boolean isLoanAmountFromValidInterval(final BigDecimal loanAmount) {
-		return (loanAmount.compareTo(MicrolandingConstants.MAX_LOAN_AMOUT) == 1
-				|| loanAmount.compareTo(MicrolandingConstants.MIN_LOAN_AMOUT) == -1);
+		return (loanAmount.compareTo(MicrolandingConstants.MAX_LOAN_AMOUT) == 1 || loanAmount
+				.compareTo(MicrolandingConstants.MIN_LOAN_AMOUT) == -1);
 	}
-	
+
 	private static boolean isLoanTermFromValidInterval(final Integer loanTerm) {
-		return (loanTerm.compareTo(MicrolandingConstants.MAX_LOAN_TERM) == 1
-				|| loanTerm.compareTo(MicrolandingConstants.MIN_LOAN_TERM) == -1);
+		return (loanTerm.compareTo(MicrolandingConstants.MAX_LOAN_TERM) == 1 || loanTerm
+				.compareTo(MicrolandingConstants.MIN_LOAN_TERM) == -1);
 	}
 }
